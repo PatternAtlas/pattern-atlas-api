@@ -3,8 +3,12 @@ This document provides an index to all development guidelines and background inf
 - [ADR](/adr) - Information on Architectural decisions can be found here
 
 ## Quick Develop
-<!---
 ### PatternPediaAuth
+PatternPediaAuth is a Spring Boot Authentication Server and it's main purpose is to give PatternPediaAPI user management capabilities.
+This is achieved through using the OAuth 2.0 Authentication Code Flow, additionally new users can create accounts.
+It runs on Port 8081
+
+### Development
 1. Clone the repository `git clone https://github.com/PatternPedia/pattern-pedia-auth.git`.
 2. Navigate to repository directory `cd pattern-pedia-auth/`.
 2. Build the repository 
@@ -22,8 +26,12 @@ This document provides an index to all development guidelines and background inf
 5. Insert the following commands  `docker-compose up -d`
 
 #### IntelliJ
-3. [Follow PatternPediaAPI from Step 5 pls](#step5) 
+3. [Follow PatternPediaAPI from Step 5 pls](#step5)
 
+#### Turn authentication on/off for PatternPediaAPI
+If you don't need the capabilities of the PatternPediaAuth server during development. You can follow the instructions in the following file 
+[Security Config file](https://github.com/PatternPedia/pattern-pedia-views-backend/blob/ba-meyer-master/src/main/java/com/patternpedia/api/config/ResourceServerConfig.java)
+to turn those off or on. An easier way will be added in a future realease.
 
 #### Default User
 During development default users are
@@ -31,7 +39,6 @@ During development default users are
 - Member: name: `member@mail` password: `pass` 
 
 ### PatternPediaAPI 
---->
 1. Clone the repository `git clone https://github.com/PatternPedia/pattern-pedia-views-backend.git`.
 2. Build the repository `mvn package -DskipTests` (skiping the tests for a faster build), Java 8 required.
 3. Clone the repository `git clone https://github.com/PatternPedia/pattern-pedia-views-ui.git`.

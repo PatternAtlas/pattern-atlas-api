@@ -11,8 +11,6 @@ import java.util.UUID;
 public interface IssueRepository extends JpaRepository<Issue, UUID> {
 
     public Optional<Issue> findByUri(String uri);
-
     public boolean existsByUri(String uri);
-
-
+    public boolean existsByName(String name);
 }

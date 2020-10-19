@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.patternpedia.api.entities.EntityWithURI;
 import com.patternpedia.api.entities.PatternLanguage;
-import com.patternpedia.api.entities.candidate.rating.CandidateRating;
-import com.patternpedia.api.entities.user.UserEntity;
-import com.patternpedia.api.rest.model.CandidateModel;
+import com.patternpedia.api.entities.candidate.author.CandidateAuthor;
+import com.patternpedia.api.entities.candidate.comment.CandidateComment;
+import com.patternpedia.api.entities.candidate.evidence.CandidateEvidence;
+import com.patternpedia.api.entities.issue.evidence.IssueEvidence;
+import com.patternpedia.api.rest.model.candidate.CandidateModelRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -30,14 +32,16 @@ public class Candidate extends EntityWithURI {
     @ManyToOne
     private PatternLanguage patternLanguage;
 
-//    @Type(type = "jsonb")
-//    @Column(columnDefinition = "jsonb")
-//    @NotNull
-    private String content;
-
-    private int rating = 0;
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    @NotNull
+    private Object content;
 
     private String version = "0.1.0";
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CandidateAuthor> authors = new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -47,38 +51,26 @@ public class Candidate extends EntityWithURI {
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CandidateComment> comments = new ArrayList<>();
 
-    public Candidate (CandidateModel candidateModel) {
-        this.setId(candidateModel.getId());
-        this.setUri(candidateModel.getUri());
-        this.setName(candidateModel.getName());
-        this.setIconUrl(candidateModel.getIconUrl());
-       //patternLanguage
-        this.setContent(candidateModel.getContent());
-        this.setVersion(candidateModel.getVersion());
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CandidateEvidence> evidences = new ArrayList<>();
+
+    public Candidate (CandidateModelRequest candidateModelRequest) {
+//        this.setId(candidateModel.getId());
+        this.setUri(candidateModelRequest.getUri());
+        this.setName(candidateModelRequest.getName());
+        this.setIconUrl(candidateModelRequest.getIconUrl());
+        this.setContent(candidateModelRequest.getContent());
+        this.setVersion(candidateModelRequest.getVersion());
     }
 
-
-    public void addComment(CandidateComment comment, UserEntity user) {
-        comments.add(comment);
-        comment.setCandidate(this);
-        comment.setUser(user);
-    }
-
-    public void updateComment(CandidateComment updateComment) {
-        ListIterator<CandidateComment> commentIterator = comments.listIterator();
-        while (commentIterator.hasNext()) {
-            CandidateComment next = commentIterator.next();
-            if (next.getId().equals(updateComment.getId())) {
-                commentIterator.set(updateComment);
-                break;
-            }
-        }
-    }
-
-    public void removeComment(CandidateComment comment) {
-        comments.remove(comment);
-        comment.setCandidate(null);
-        comment.setUser(null);
+    public void updateCandidate(CandidateModelRequest candidateModelRequest) {
+        this.setId(candidateModelRequest.getId());
+        this.setUri(candidateModelRequest.getUri());
+        this.setName(candidateModelRequest.getName());
+        this.setIconUrl(candidateModelRequest.getIconUrl());
+        this.setContent(candidateModelRequest.getContent());
+        this.setVersion(candidateModelRequest.getVersion());
     }
 
     public String toString() {

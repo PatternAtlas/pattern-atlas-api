@@ -2,16 +2,20 @@ package com.patternpedia.api.entities.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.patternpedia.api.entities.candidate.CandidateComment;
-import com.patternpedia.api.entities.candidate.rating.CandidateRating;
-import com.patternpedia.api.entities.issue.IssueComment;
-import com.patternpedia.api.entities.issue.rating.IssueRating;
-import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
+import com.patternpedia.api.entities.candidate.CandidateRating;
+import com.patternpedia.api.entities.candidate.comment.CandidateComment;
+import com.patternpedia.api.entities.candidate.author.CandidateAuthor;
+import com.patternpedia.api.entities.candidate.evidence.CandidateEvidence;
+import com.patternpedia.api.entities.issue.comment.IssueComment;
+import com.patternpedia.api.entities.issue.author.IssueAuthor;
+import com.patternpedia.api.entities.issue.IssueRating;
+import com.patternpedia.api.entities.issue.evidence.IssueEvidence;
+import com.patternpedia.api.entities.user.role.Role;
+import com.patternpedia.api.rest.model.user.UserModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +24,6 @@ import java.util.*;
 @Entity
 @Data
 @NoArgsConstructor
-@TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class)
 public class UserEntity implements Serializable{
 
     /** User fields*/
@@ -28,15 +31,17 @@ public class UserEntity implements Serializable{
     @GeneratedValue(generator = "pg-uuid")
     private UUID id;
 
-    @Enumerated(EnumType.STRING)
-    @ElementCollection
-    @Type(type = "pgsql_enum")
-    private List<UserRole> roles = new ArrayList<>(Arrays.asList(UserRole.MEMBER));
+    @JsonIgnore
+    @ToString.Exclude
+    @ManyToOne()
+    private Role role;
 
     @NaturalId(mutable = true)
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NaturalId(mutable = true)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -45,13 +50,25 @@ public class UserEntity implements Serializable{
     /** Issue fields*/
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<IssueAuthor> issues = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<IssueRating> issueRatings = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<IssueComment> issueComments = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<IssueEvidence> issueEvidence = new ArrayList<>();
+
     /** Candidate fields*/
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<CandidateAuthor> candidates = new HashSet<>();
+
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CandidateRating> candidateRatings = new HashSet<>();
@@ -59,6 +76,10 @@ public class UserEntity implements Serializable{
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CandidateComment> candidateComments = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CandidateEvidence> candidateEvidence = new ArrayList<>();
 
     /** Pattern fields*/
 //    @JsonIgnore
@@ -69,17 +90,23 @@ public class UserEntity implements Serializable{
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<CandidateComment> candidateComments = new ArrayList<>();
 
-    public UserEntity(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
+    public UserEntity(UserModel userModel, String password) {
+        this.id = userModel.getId();
+        this.name = userModel.getName();
+        this.email = userModel.getEmail();
         this.password = password;
     }
 
-    public UserEntity(String name, String email, String password, List<UserRole> roles) {
+    public UserEntity(String name, String email, String password, Role role) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
+    }
+
+    public void updateUserEntity(UserModel userModel) {
+        this.setName(userModel.getName());
+        this.setEmail(userModel.getEmail());
     }
 
     @Override
