@@ -7,16 +7,32 @@ RUN mv target/patternatlas.api-1.2.0-SNAPSHOT.jar target/patternatlas.api-1.2.0-
 RUN mvn package -DskipTests -PHAL_EXPLORER
 
 
+#liquibase initial data
+ENV PATTERN_ATLAS_FETCH_INITIAL_DATA false
+ENV PATTERN_ATLAS_CONTENT_REPOSITORY_URL "https://github.com/PatternAtlas/pattern-atlas-content.git"
+ENV PATTERN_ATLAS_PRIVATE_CONTENT_REPOSITORY_URL "git@github.com:PatternAtlas/internal-pattern-atlas-content.git"
+ENV PATTERN_ATLAS_CONTENT_REPOSITORY_BRANCH "liquibase_content"
+
+# install dependencies (git)
+RUN  apt-get update \
+  && apt-get update -qq && apt-get install -qqy \
+  git \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir /tmp/pattern-atlas-content
+RUN git clone --single-branch --branch ${PATTERN_ATLAS_CONTENT_REPOSITORY_BRANCH} ${PATTERN_ATLAS_CONTENT_REPOSITORY_URL} /tmp/pattern-atlas-content
+
 FROM openjdk:8
 
 ARG DOCKERIZE_VERSION=v0.6.1
 
 ENV API_PORT 1977
-ENV JDBC_DATABASE_URL localhost
+ENV JDBC_DATABASE_URL host.docker.internal
 ENV JDBC_DATABASE_USERNAME postgres
 ENV JDBC_DATABASE_PASSWORD postgres
 ENV JDBC_DATABASE_NAME postgres
-ENV JDBC_DATABASE_PORT 5060
+ENV JDBC_DATABASE_PORT 5432
 ENV HAL_EXPLORER true
 
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
@@ -28,6 +44,9 @@ COPY --from=builder /tmp/pattern-atlas-api/target/patternatlas.api-1.2.0-SNAPSHO
 COPY --from=builder /tmp/pattern-atlas-api/target/patternatlas.api-1.2.0-SNAPSHOT-no-hal-explorer.jar /var/www/java/api_no_hal_explorer.jar
 
 ADD .docker/application.properties.tpl /var/www/java/application.properties.tpl
+
+	
+COPY --from=builder /tmp/pattern-atlas-content/liquibase_changelog/*.xml /var/www/java/
 
 CMD  dockerize -template /var/www/java/application.properties.tpl:/var/www/java/application.properties \
      && cd /var/www/java/ \
