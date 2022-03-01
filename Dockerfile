@@ -14,7 +14,7 @@ ARG DOCKERIZE_VERSION=v0.6.1
 ENV PATTERN_ATLAS_FETCH_INITIAL_DATA false
 ENV PATTERN_ATLAS_CONTENT_REPOSITORY_URL "https://github.com/PatternAtlas/pattern-atlas-content.git"
 ENV PATTERN_ATLAS_PRIVATE_CONTENT_REPOSITORY_URL "git@github.com:PatternAtlas/internal-pattern-atlas-content.git"
-ENV PATTERN_ATLAS_CONTENT_REPOSITORY_BRANCH "liquibase_content"
+ENV PATTERN_ATLAS_CONTENT_REPOSITORY_BRANCH "main"
 
 # install dependencies (git)
 RUN  apt-get update \
