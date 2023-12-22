@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.github.patternatlas.api.entities.EntityWithURI;
+import io.github.patternatlas.api.entities.solutionmodel.SolutionModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -36,4 +37,7 @@ public class DesignModel extends EntityWithURI {
     @JsonIgnore
     @OneToMany(mappedBy = "designModel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DesignModelUndirectedEdge> undirectedEdges;
+
+    @OneToMany(mappedBy = "designModel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SolutionModel> solutionModels;
 }

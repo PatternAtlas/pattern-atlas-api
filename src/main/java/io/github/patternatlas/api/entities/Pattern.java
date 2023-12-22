@@ -13,6 +13,7 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.github.patternatlas.api.entities.solutionmodel.ConcreteSolutionDescriptor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,11 @@ public class Pattern extends EntityWithURI {
     @ToString.Exclude
     @ManyToOne
     private PatternLanguage patternLanguage;
+
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "pattern")
+    private List<ConcreteSolutionDescriptor> concreteSolutionDescriptors;
 
     @JsonIgnore
     @ToString.Exclude

@@ -3,6 +3,7 @@ package io.github.patternatlas.api.rest.model;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import io.github.patternatlas.api.entities.Pattern;
 import io.github.patternatlas.api.entities.PatternLanguage;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class PatternModel {
     protected String patternLanguageName;
 
     private Boolean deploymentModelingBehaviorPattern;
+
     private Boolean deploymentModelingStructurePattern;
 
     @JsonIgnore

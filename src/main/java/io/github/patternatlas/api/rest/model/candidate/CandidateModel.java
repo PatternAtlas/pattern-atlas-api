@@ -85,4 +85,8 @@ public class CandidateModel {
             this.patternLanguageName = "NONE";
         }
     }
+
+    public static CandidateModel from(Candidate candidate) {
+        return new CandidateModel(candidate);
+    }
 }

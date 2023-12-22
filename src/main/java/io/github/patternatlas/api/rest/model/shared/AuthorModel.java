@@ -40,4 +40,8 @@ public class AuthorModel {
         this(user);
         this.authorRole = role;
     }
+
+    public static AuthorModel from(UserEntity user) {
+        return new AuthorModel(user);
+    }
 }

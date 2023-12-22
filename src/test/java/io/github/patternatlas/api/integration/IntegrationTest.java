@@ -15,11 +15,11 @@ import com.vladmihalcea.hibernate.type.util.Configuration;
 public abstract class IntegrationTest {
 
     @ClassRule
-    public static PostgreSQLContainer postgreSQLContainer = PostgresqlContainer.getInstance();
+    public static PostgreSQLContainer<PostgresqlContainer> postgreSQLContainer = PostgresqlContainer.getInstance();
 
     public static class PostgresqlContainer extends PostgreSQLContainer<PostgresqlContainer> {
 
-        private static final String IMAGE_VERSION = "postgres:10";
+        private static final String IMAGE_VERSION = "postgres:15";
 
         private static PostgresqlContainer container;
 

@@ -8,6 +8,7 @@ import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.github.patternatlas.api.entities.Pattern;
 import io.github.patternatlas.api.entities.designmodel.DesignModel;
 import io.github.patternatlas.api.entities.designmodel.DesignModelEdgeType;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternEdge;
@@ -21,7 +22,6 @@ import io.github.patternatlas.api.repositories.DesignModelPatternEdgeRepository;
 import io.github.patternatlas.api.repositories.DesignModelPatternInstanceRepository;
 import io.github.patternatlas.api.repositories.DesignModelRepository;
 import io.github.patternatlas.api.repositories.DirectedEdgeRepository;
-import io.github.patternatlas.api.entities.Pattern;
 import io.github.patternatlas.api.repositories.PatternViewDirectedEdgeRepository;
 import io.github.patternatlas.api.repositories.PatternViewUndirectedEdgeRepository;
 import io.github.patternatlas.api.repositories.UndirectedEdgeReository;
@@ -31,9 +31,13 @@ import io.github.patternatlas.api.repositories.UndirectedEdgeReository;
 public class DesignModelServiceImpl implements DesignModelService {
 
     private final PatternService patternService;
+
     private final DesignModelRepository designModelRepository;
+
     private final DesignModelPatternInstanceRepository designModelPatternInstanceRepository;
+
     private final DesignModelPatternEdgeRepository designModelPatternEdgeRepository;
+
     private final DesignModelEdgeTypeRepository designModelEdgeTypeRepository;
 
     public DesignModelServiceImpl(PatternService patternService,
@@ -76,10 +80,8 @@ public class DesignModelServiceImpl implements DesignModelService {
     @Override
     @Transactional(readOnly = true)
     public DesignModel getDesignModel(UUID designModelId) {
-        DesignModel designModel = this.designModelRepository.findById(designModelId)
-                .orElseThrow(() -> new DesignModelNotFoundException(designModelId));
-
-        return designModel;
+        return this.designModelRepository.findById(designModelId)
+            .orElseThrow(() -> new DesignModelNotFoundException(designModelId));
     }
 
     public List<DesignModelEdgeType> getDesignModelEdgeTypes() {
@@ -89,11 +91,9 @@ public class DesignModelServiceImpl implements DesignModelService {
     @Override
     @Transactional(readOnly = true)
     public DesignModelPatternInstance getPatternInstance(UUID designModelId, UUID patternInstanceId) {
-        DesignModelPatternInstance patternInstance = this.designModelPatternInstanceRepository
-                .findTopByDesignModel_IdAndPatternInstanceId(designModelId, patternInstanceId)
-                .orElseThrow(() -> new DesignModelPatternInstanceNotFoundException(designModelId, patternInstanceId));
-
-        return patternInstance;
+        return this.designModelPatternInstanceRepository
+            .findTopByDesignModel_IdAndPatternInstanceId(designModelId, patternInstanceId)
+            .orElseThrow(() -> new DesignModelPatternInstanceNotFoundException(designModelId, patternInstanceId));
     }
 
     @Override
@@ -110,7 +110,7 @@ public class DesignModelServiceImpl implements DesignModelService {
     @Transactional
     public void deletePatternInstance(UUID designModelId, UUID patternInstanceId) {
         this.designModelPatternEdgeRepository.deleteAllByDesignModel_IdAndPatternInstance1_PatternInstanceIdOrPatternInstance2_PatternInstanceId(
-                designModelId, patternInstanceId, patternInstanceId
+            designModelId, patternInstanceId, patternInstanceId
         );
         this.designModelPatternInstanceRepository.deleteAllByDesignModel_IdAndPatternInstanceId(designModelId, patternInstanceId);
     }
@@ -119,8 +119,8 @@ public class DesignModelServiceImpl implements DesignModelService {
     @Transactional
     public void updatePatternInstancePosition(UUID designModelId, UUID patternInstanceId, Double x, Double y) {
         DesignModelPatternInstance patternInstance = this.designModelPatternInstanceRepository
-                .findTopByDesignModel_IdAndPatternInstanceId(designModelId, patternInstanceId)
-                .orElseThrow(() -> new DesignModelPatternInstanceNotFoundException(designModelId, patternInstanceId));
+            .findTopByDesignModel_IdAndPatternInstanceId(designModelId, patternInstanceId)
+            .orElseThrow(() -> new DesignModelPatternInstanceNotFoundException(designModelId, patternInstanceId));
 
         DesignModelPatternGraphData graphData = new DesignModelPatternGraphData();
         graphData.setX(x);
@@ -135,7 +135,8 @@ public class DesignModelServiceImpl implements DesignModelService {
     @Override
     @Transactional(readOnly = true)
     public List<DesignModelPatternEdge> getEdges(UUID designModelId) {
-        List<DesignModelPatternEdge> edgeList = this.designModelPatternEdgeRepository.findAllByDesignModelId(designModelId).orElse(Collections.emptyList());
+        List<DesignModelPatternEdge> edgeList =
+            this.designModelPatternEdgeRepository.findAllByDesignModelId(designModelId).orElse(Collections.emptyList());
 
         if (edgeList.isEmpty() && !this.designModelRepository.existsById(designModelId)) {
             throw new DesignModelNotFoundException(designModelId);
@@ -148,15 +149,15 @@ public class DesignModelServiceImpl implements DesignModelService {
     @Transactional
     public void addEdge(UUID designModelId, UUID patternInstanceId1, UUID patternInstanceId2, Boolean directed, String type, String description) {
         DesignModel designModel = this.designModelRepository.findById(designModelId)
-                .orElseThrow(() -> new DesignModelNotFoundException(designModelId));
+            .orElseThrow(() -> new DesignModelNotFoundException(designModelId));
 
         DesignModelPatternInstance patternInstance1 = this.designModelPatternInstanceRepository
-                .findTopByDesignModel_IdAndPatternInstanceId(designModelId, patternInstanceId1)
-                .orElseThrow(() -> new DesignModelPatternInstanceNotFoundException(designModelId, patternInstanceId1));
+            .findTopByDesignModel_IdAndPatternInstanceId(designModelId, patternInstanceId1)
+            .orElseThrow(() -> new DesignModelPatternInstanceNotFoundException(designModelId, patternInstanceId1));
 
         DesignModelPatternInstance patternInstance2 = this.designModelPatternInstanceRepository
-                .findTopByDesignModel_IdAndPatternInstanceId(designModelId, patternInstanceId2)
-                .orElseThrow(() -> new DesignModelPatternInstanceNotFoundException(designModelId, patternInstanceId2));
+            .findTopByDesignModel_IdAndPatternInstanceId(designModelId, patternInstanceId2)
+            .orElseThrow(() -> new DesignModelPatternInstanceNotFoundException(designModelId, patternInstanceId2));
 
         DesignModelPatternEdge designModelEdge = new DesignModelPatternEdge();
         designModelEdge.setDesignModel(designModel);
@@ -173,7 +174,7 @@ public class DesignModelServiceImpl implements DesignModelService {
     @Transactional
     public void deleteEdge(UUID designModelId, UUID patternInstanceId1, UUID patternInstanceId2) {
         this.designModelPatternEdgeRepository.deleteAllByDesignModel_IdAndPatternInstance1_PatternInstanceIdAndPatternInstance2_PatternInstanceId(
-                designModelId, patternInstanceId1, patternInstanceId2
+            designModelId, patternInstanceId1, patternInstanceId2
         );
     }
 

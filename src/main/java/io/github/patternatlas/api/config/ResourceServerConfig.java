@@ -39,6 +39,7 @@ class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
+    @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources.resourceId("pattern-pedia-api");
     }

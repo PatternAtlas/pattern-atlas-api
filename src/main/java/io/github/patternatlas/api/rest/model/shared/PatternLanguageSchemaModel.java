@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import io.github.patternatlas.api.entities.PatternLanguage;
 
+import io.github.patternatlas.api.rest.model.PatternLanguageModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -30,4 +31,7 @@ public class PatternLanguageSchemaModel {
                         collect(Collectors.toList());
     }
 
+    public static PatternLanguageSchemaModel from(PatternLanguage patternLanguage) {
+        return new PatternLanguageSchemaModel(patternLanguage);
+    }
 }

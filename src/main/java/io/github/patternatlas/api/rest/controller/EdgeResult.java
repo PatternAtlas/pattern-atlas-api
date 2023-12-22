@@ -16,6 +16,5 @@ public class EdgeResult {
     private List<DirectedEdge> outgoingEdges;
     private List<DirectedEdge> ingoingEdges;
     private List<UndirectedEdge> undirectedEdges;
-
     private List<Link> standardPatternLinks;
 }

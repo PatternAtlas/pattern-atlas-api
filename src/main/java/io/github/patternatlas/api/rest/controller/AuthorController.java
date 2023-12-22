@@ -9,6 +9,7 @@ import io.github.patternatlas.api.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class AuthorController {
     private UserService userService;
 
     public AuthorController(
-            UserService userService
+        UserService userService
     ) {
         this.userService = userService;
     }
@@ -35,17 +36,16 @@ public class AuthorController {
     // as authors, therefore it is not secured
     @Operation(operationId = "getallUsersAsAuthors", responses = {@ApiResponse(responseCode = "200")}, description = "Retrieve all authors")
     @GetMapping(value = "")
-    CollectionModel<EntityModel<AuthorModel>> getAll() {
-        List<EntityModel<AuthorModel>> authors = this.userService.getAllUsers()
-                .stream()
-                .map(user -> new EntityModel<>(new AuthorModel(user)))
-                .collect(Collectors.toList());
-        return new CollectionModel<>(authors);
+    List<AuthorModel> getAll() {
+        return this.userService.getAllUsers()
+            .stream()
+            .map(AuthorModel::from)
+            .collect(Collectors.toList());
     }
 
     @Operation(operationId = "getAllAuthorRoles", responses = {@ApiResponse(responseCode = "200")}, description = "Retrieve all author roles")
     @GetMapping(value = "/roles")
     String[] getAllRoles() {
-        return new String[]{AuthorConstant.HELPER, AuthorConstant.MAINTAINER, AuthorConstant.OWNER};
+        return new String[] {AuthorConstant.HELPER, AuthorConstant.MAINTAINER, AuthorConstant.OWNER};
     }
 }
