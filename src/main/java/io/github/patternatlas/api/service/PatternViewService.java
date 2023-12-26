@@ -11,10 +11,10 @@ import io.github.patternatlas.api.entities.DirectedEdge;
 import io.github.patternatlas.api.entities.Pattern;
 import io.github.patternatlas.api.entities.PatternView;
 import io.github.patternatlas.api.entities.UndirectedEdge;
-import io.github.patternatlas.api.rest.model.AddDirectedEdgeToViewRequest;
-import io.github.patternatlas.api.rest.model.AddUndirectedEdgeToViewRequest;
-import io.github.patternatlas.api.rest.model.UpdateDirectedEdgeRequest;
-import io.github.patternatlas.api.rest.model.UpdateUndirectedEdgeRequest;
+import io.github.patternatlas.api.rest.dto.AddDirectedEdgeToViewRequest;
+import io.github.patternatlas.api.rest.dto.AddUndirectedEdgeToViewRequest;
+import io.github.patternatlas.api.rest.dto.UpdateDirectedEdgeRequest;
+import io.github.patternatlas.api.rest.dto.UpdateUndirectedEdgeRequest;
 
 public interface PatternViewService {
 

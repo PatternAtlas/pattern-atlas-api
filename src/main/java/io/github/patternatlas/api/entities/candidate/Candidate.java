@@ -10,7 +10,7 @@ import io.github.patternatlas.api.entities.PatternLanguage;
 import io.github.patternatlas.api.entities.candidate.author.CandidateAuthor;
 import io.github.patternatlas.api.entities.candidate.comment.CandidateComment;
 import io.github.patternatlas.api.entities.candidate.evidence.CandidateEvidence;
-import io.github.patternatlas.api.rest.model.candidate.CandidateModelRequest;
+import io.github.patternatlas.api.rest.dto.candidate.CandidateModelRequest;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

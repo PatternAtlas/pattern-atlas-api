@@ -1,11 +1,10 @@
 package io.github.patternatlas.api.service;
 
 import io.github.patternatlas.api.entities.user.UserEntity;
-import io.github.patternatlas.api.rest.model.user.UserModelRequest;
+import io.github.patternatlas.api.rest.dto.user.UserModelRequest;
 
 import java.util.UUID;
 
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

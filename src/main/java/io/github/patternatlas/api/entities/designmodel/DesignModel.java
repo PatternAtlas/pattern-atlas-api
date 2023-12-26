@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.github.patternatlas.api.entities.EntityWithURI;
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModel;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

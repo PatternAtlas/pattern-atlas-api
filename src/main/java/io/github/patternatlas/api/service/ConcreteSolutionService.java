@@ -8,7 +8,7 @@ import java.util.UUID;
 import io.github.patternatlas.api.entities.designmodel.ConcreteSolution;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternEdge;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternInstance;
-import io.github.patternatlas.api.rest.model.FileDTO;
+import io.github.patternatlas.api.rest.dto.FileDTO;
 
 public interface ConcreteSolutionService {
 

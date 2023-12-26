@@ -3,11 +3,11 @@ package io.github.patternatlas.api.service;
 import java.util.List;
 import java.util.UUID;
 
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModel;
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModelConcreteSolutionInstance;
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModelEdge;
-import io.github.patternatlas.api.rest.model.AddEdgeToSolutionModelRequest;
-import io.github.patternatlas.api.rest.model.UpdateSolutionModelEdgeRequest;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModel;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelConcreteSolutionInstance;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelEdge;
+import io.github.patternatlas.api.rest.dto.AddEdgeToSolutionModelRequest;
+import io.github.patternatlas.api.rest.dto.UpdateSolutionModelEdgeRequest;
 
 public interface SolutionModelService {
 

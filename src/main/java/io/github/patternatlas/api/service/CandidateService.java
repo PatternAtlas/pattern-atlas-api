@@ -6,12 +6,12 @@ import java.util.UUID;
 import io.github.patternatlas.api.entities.candidate.Candidate;
 import io.github.patternatlas.api.entities.candidate.comment.CandidateComment;
 import io.github.patternatlas.api.entities.candidate.evidence.CandidateEvidence;
-import io.github.patternatlas.api.rest.model.candidate.CandidateModelRequest;
-import io.github.patternatlas.api.rest.model.shared.AuthorModelRequest;
-import io.github.patternatlas.api.rest.model.shared.CommentModel;
-import io.github.patternatlas.api.rest.model.shared.EvidenceModel;
-import io.github.patternatlas.api.rest.model.shared.RatingModelMultiRequest;
-import io.github.patternatlas.api.rest.model.shared.RatingModelRequest;
+import io.github.patternatlas.api.rest.dto.candidate.CandidateModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.AuthorModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.CommentModel;
+import io.github.patternatlas.api.rest.dto.shared.EvidenceModel;
+import io.github.patternatlas.api.rest.dto.shared.RatingModelMultiRequest;
+import io.github.patternatlas.api.rest.dto.shared.RatingModelRequest;
 
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;

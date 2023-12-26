@@ -2,9 +2,9 @@ package io.github.patternatlas.api.service;
 
 import java.util.List;
 
-import io.github.patternatlas.api.entities.solutionmodel.ConcreteSolutionDescriptor;
-import io.github.patternatlas.api.rest.model.CreateConcreteSolutionDescriptorRequest;
-import io.github.patternatlas.api.rest.model.UpdateConcreteSolutionDescriptorRequest;
+import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
+import io.github.patternatlas.api.rest.dto.CreateConcreteSolutionDescriptorRequest;
+import io.github.patternatlas.api.rest.dto.UpdateConcreteSolutionDescriptorRequest;
 
 public interface ConcreteSolutionDescriptorService {
 

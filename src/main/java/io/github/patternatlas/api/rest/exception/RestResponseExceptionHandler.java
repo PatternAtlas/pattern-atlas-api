@@ -7,7 +7,7 @@ import io.github.patternatlas.api.exception.PatternNotFoundException;
 import io.github.patternatlas.api.exception.PatternSchemaNotFoundException;
 import io.github.patternatlas.api.exception.PatternViewNotFoundException;
 import io.github.patternatlas.api.exception.UndirectedEdgeNotFoundException;
-import io.github.patternatlas.api.rest.model.ErrorMessageDTO;
+import io.github.patternatlas.api.rest.dto.ErrorMessageDTO;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpHeaders;

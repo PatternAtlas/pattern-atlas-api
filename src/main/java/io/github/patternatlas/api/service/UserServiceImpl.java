@@ -7,14 +7,12 @@ import io.github.patternatlas.api.entities.user.UserEntity;
 import io.github.patternatlas.api.repositories.PrivilegeRepository;
 import io.github.patternatlas.api.repositories.RoleRepository;
 import io.github.patternatlas.api.repositories.UserRepository;
-import io.github.patternatlas.api.rest.model.user.RoleModel;
-import io.github.patternatlas.api.rest.model.user.RoleModelRequest;
-import io.github.patternatlas.api.rest.model.user.UserModelRequest;
+import io.github.patternatlas.api.rest.dto.user.RoleModel;
+import io.github.patternatlas.api.rest.dto.user.RoleModelRequest;
+import io.github.patternatlas.api.rest.dto.user.UserModelRequest;
 
-import javax.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

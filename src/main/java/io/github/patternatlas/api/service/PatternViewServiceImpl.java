@@ -29,10 +29,10 @@ import io.github.patternatlas.api.repositories.PatternViewPatternRepository;
 import io.github.patternatlas.api.repositories.PatternViewRepository;
 import io.github.patternatlas.api.repositories.PatternViewUndirectedEdgeRepository;
 import io.github.patternatlas.api.repositories.UndirectedEdgeReository;
-import io.github.patternatlas.api.rest.model.AddDirectedEdgeToViewRequest;
-import io.github.patternatlas.api.rest.model.AddUndirectedEdgeToViewRequest;
-import io.github.patternatlas.api.rest.model.UpdateDirectedEdgeRequest;
-import io.github.patternatlas.api.rest.model.UpdateUndirectedEdgeRequest;
+import io.github.patternatlas.api.rest.dto.AddDirectedEdgeToViewRequest;
+import io.github.patternatlas.api.rest.dto.AddUndirectedEdgeToViewRequest;
+import io.github.patternatlas.api.rest.dto.UpdateDirectedEdgeRequest;
+import io.github.patternatlas.api.rest.dto.UpdateUndirectedEdgeRequest;
 
 @Service
 @Transactional

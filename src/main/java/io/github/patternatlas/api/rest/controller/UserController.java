@@ -10,19 +10,18 @@ import java.util.stream.Collectors;
 import io.github.patternatlas.api.entities.user.UserEntity;
 import io.github.patternatlas.api.entities.user.role.Privilege;
 import io.github.patternatlas.api.entities.user.role.Role;
-import io.github.patternatlas.api.rest.model.user.PrivilegeModel;
-import io.github.patternatlas.api.rest.model.user.RoleModel;
-import io.github.patternatlas.api.rest.model.user.RoleModelRequest;
-import io.github.patternatlas.api.rest.model.user.UserModel;
-import io.github.patternatlas.api.rest.model.user.UserModelRequest;
+import io.github.patternatlas.api.rest.dto.user.PrivilegeModel;
+import io.github.patternatlas.api.rest.dto.user.RoleModel;
+import io.github.patternatlas.api.rest.dto.user.RoleModelRequest;
+import io.github.patternatlas.api.rest.dto.user.UserModel;
+import io.github.patternatlas.api.rest.dto.user.UserModelRequest;
 import io.github.patternatlas.api.service.UserService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;

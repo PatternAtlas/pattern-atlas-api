@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.github.patternatlas.api.entities.Image;
-import io.github.patternatlas.api.rest.model.ImageModel;
+import io.github.patternatlas.api.rest.dto.ImageModel;
 import io.github.patternatlas.api.service.DiscussionService;
 import io.github.patternatlas.api.service.ImageService;
 

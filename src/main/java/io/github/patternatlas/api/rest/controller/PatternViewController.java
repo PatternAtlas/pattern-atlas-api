@@ -31,7 +31,7 @@ import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.patternatlas.api.entities.PatternView;
-import io.github.patternatlas.api.rest.model.GraphModel;
+import io.github.patternatlas.api.rest.dto.GraphModel;
 import io.github.patternatlas.api.service.PatternViewService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

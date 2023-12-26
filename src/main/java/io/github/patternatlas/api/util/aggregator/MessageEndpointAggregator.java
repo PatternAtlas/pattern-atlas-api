@@ -7,7 +7,7 @@ import java.util.Map;
 import io.github.patternatlas.api.entities.designmodel.AggregationData;
 import io.github.patternatlas.api.entities.designmodel.ConcreteSolution;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternInstance;
-import io.github.patternatlas.api.rest.model.FileDTO;
+import io.github.patternatlas.api.rest.dto.FileDTO;
 
 @AggregatorMetadata(sourceTypes = {"MessageEndpoint"}, targetTypes = {"", "AWS-CloudFormation-JSON", "ActiveMQ-XML", "ActiveMQ-Java"})
 public class MessageEndpointAggregator extends ActiveMQAggregator {

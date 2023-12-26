@@ -14,7 +14,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.github.patternatlas.api.rest.model.Status;
+import io.github.patternatlas.api.rest.dto.Status;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

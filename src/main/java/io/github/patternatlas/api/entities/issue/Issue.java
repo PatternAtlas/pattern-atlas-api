@@ -7,7 +7,7 @@ import io.github.patternatlas.api.entities.EntityWithURI;
 import io.github.patternatlas.api.entities.issue.author.IssueAuthor;
 import io.github.patternatlas.api.entities.issue.comment.IssueComment;
 import io.github.patternatlas.api.entities.issue.evidence.IssueEvidence;
-import io.github.patternatlas.api.rest.model.issue.IssueModelRequest;
+import io.github.patternatlas.api.rest.dto.issue.IssueModelRequest;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

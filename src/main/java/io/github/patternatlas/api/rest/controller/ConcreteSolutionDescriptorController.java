@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.patternatlas.api.entities.solutionmodel.ConcreteSolutionDescriptor;
-import io.github.patternatlas.api.rest.model.CreateConcreteSolutionDescriptorRequest;
-import io.github.patternatlas.api.rest.model.UpdateConcreteSolutionDescriptorRequest;
+import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
+import io.github.patternatlas.api.rest.dto.CreateConcreteSolutionDescriptorRequest;
+import io.github.patternatlas.api.rest.dto.UpdateConcreteSolutionDescriptorRequest;
 import io.github.patternatlas.api.service.ConcreteSolutionDescriptorService;
 import lombok.AllArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;

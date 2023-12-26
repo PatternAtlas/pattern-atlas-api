@@ -2,80 +2,169 @@ package io.github.patternatlas.api.aggregation;
 
 import static org.junit.Assert.assertEquals;
 
-import org.apache.catalina.Store;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.UUID;
+
+import javax.validation.constraints.NotNull;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import io.github.patternatlas.api.entities.Pattern;
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModel;
+import io.github.patternatlas.api.entities.PatternLanguage;
+import io.github.patternatlas.api.entities.PatternSchema;
+import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModel;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelConcreteSolutionInstance;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelEdge;
 import io.github.patternatlas.api.integration.IntegrationTest;
-import io.github.patternatlas.api.repositories.PatternRepository;
-import io.github.patternatlas.api.rest.model.AddEdgeToSolutionModelRequest;
-import io.github.patternatlas.api.rest.model.CreateConcreteSolutionDescriptorRequest;
+import io.github.patternatlas.api.rest.dto.AddEdgeToSolutionModelRequest;
+import io.github.patternatlas.api.rest.dto.CreateConcreteSolutionDescriptorRequest;
 import io.github.patternatlas.api.service.ConcreteSolutionDescriptorService;
+import io.github.patternatlas.api.service.PatternLanguageService;
+import io.github.patternatlas.api.service.PatternService;
 import io.github.patternatlas.api.service.SolutionModelService;
 import io.github.patternatlas.api.service.aggregation.AggregationEngine;
+import io.github.patternatlas.api.service.aggregation.AggregationProgram;
 
 @SpringBootTest
 public class AggregationEngineTest extends IntegrationTest {
 
     @Autowired
-    private SolutionModelService solutionModelService;
+    ConcreteSolutionDescriptorService concreteSolutionDescriptorService;
 
     @Autowired
-    ConcreteSolutionDescriptorService concreteSolutionDescriptorService;
+    SolutionModelService solutionModelService;
+
+    @Autowired
+    PatternLanguageService patternLanguageService;
+
+    @Autowired
+    PatternService patternService;
 
     @Autowired
     AggregationEngine aggregationEngine;
 
     @Autowired
-    private PatternRepository patternRepository;
-
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    List<AggregationProgram> aggregationPrograms;
 
     @Test
-    public void givenSolutionModelAndDetectorGraphFindOneMatch() throws Exception {
-        // Create Pattern 1
-        Pattern pattern1 = new Pattern();
-        pattern1.setName("Test Pattern 1");
-        pattern1 = patternRepository.save(pattern1);
+    public void givenAggregationProgramAndSolutionModelThenFindTwoAggregationContext() {
+        ConcreteSolutionDescriptor cs1 = new ConcreteSolutionDescriptor();
+        cs1.setId(java.util.UUID.randomUUID());
+        cs1.setType("TestType1");
+        cs1.setRequirements(new HashSet<>(List.of("A")));
+        cs1.setCapabilities(new HashSet<>(List.of("B")));
+        ConcreteSolutionDescriptor cs2 = new ConcreteSolutionDescriptor();
+        cs2.setId(java.util.UUID.randomUUID());
+        cs2.setType("TestType2");
+        cs2.setRequirements(new HashSet<>(List.of("B")));
+        cs2.setCapabilities(new HashSet<>(List.of("C")));
 
         var solutionModel = new SolutionModel();
         solutionModel.setName("Test Solution Model");
-        solutionModel = solutionModelService.createSolutionModel(solutionModel);
+        solutionModel.setConcreteSolutionInstances(new ArrayList<>());
+        solutionModel.setEdges(new ArrayList<>());
+        var csi1 = new SolutionModelConcreteSolutionInstance(solutionModel, cs1);
+        csi1.setId(UUID.randomUUID());
+        var csi2 = new SolutionModelConcreteSolutionInstance(solutionModel, cs2);
+        csi2.setId(UUID.randomUUID());
+        var csi3 = new SolutionModelConcreteSolutionInstance(solutionModel, cs1);
+        csi3.setId(UUID.randomUUID());
+        var csi4 = new SolutionModelConcreteSolutionInstance(solutionModel, cs2);
+        csi4.setId(UUID.randomUUID());
 
-        // Create Concrete Solution Descriptor 1
-        var csd1Request = new CreateConcreteSolutionDescriptorRequest();
-        csd1Request.setName("Concrete Solution Descriptor 1");
-        csd1Request.setType("TestType1");
-        var requirements1 = "[\"B\"]";
-        csd1Request.setRequirements(objectMapper.readTree(requirements1));
-        var capabilities1 = "[\"A\"]";
-        csd1Request.setCapabilities(objectMapper.readTree(capabilities1));
-        var csd1 = concreteSolutionDescriptorService.createConcreteSolutionDescriptor(csd1Request);
-        var csd1Instance = solutionModelService.addConcreteSolutionInstance(solutionModel.getId(), csd1.getId());
+        solutionModel.getConcreteSolutionInstances().add(csi1);
+        solutionModel.getConcreteSolutionInstances().add(csi2);
+        solutionModel.getConcreteSolutionInstances().add(csi3);
+        solutionModel.getConcreteSolutionInstances().add(csi4);
 
-        // Create Concrete Solution Descriptor 2
-        var csd2Request = new CreateConcreteSolutionDescriptorRequest();
-        csd2Request.setName("Concrete Solution Descriptor 2");
-        csd2Request.setType("TestType2");
-        var capabilities2 = "[\"B\"]";
-        csd2Request.setCapabilities(objectMapper.readTree(capabilities2));
-        var csd2 = concreteSolutionDescriptorService.createConcreteSolutionDescriptor(csd2Request);
-        var csd2Instance = solutionModelService.addConcreteSolutionInstance(solutionModel.getId(), csd2.getId());
+        var edge1 = new SolutionModelEdge();
+        edge1.setCsInstance1(csi1);
+        edge1.setCsInstance2(csi2);
+        edge1.setDirected(true);
+        edge1.setEdgeSemantic("TestEdgeSemantic");
+        edge1.setId(UUID.randomUUID());
+        solutionModel.getEdges().add(edge1);
 
-        // Create Edge between Concrete Solution Descriptors
-        var edgeRequest = new AddEdgeToSolutionModelRequest();
-        edgeRequest.setConcreteSolutionInstanceId1(csd1Instance.getId());
-        edgeRequest.setConcreteSolutionInstanceId2(csd2Instance.getId());
-        edgeRequest.setDirected(true);
-        edgeRequest.setEdgeSemantic("TestEdgeSemantic");
-        solutionModelService.createSolutionModelEdge(solutionModel.getId(), edgeRequest);
+        var edge2 = new SolutionModelEdge();
+        edge2.setCsInstance1(csi3);
+        edge2.setCsInstance2(csi4);
+        edge2.setDirected(true);
+        edge2.setEdgeSemantic("TestEdgeSemantic");
+        edge2.setId(UUID.randomUUID());
+        solutionModel.getEdges().add(edge2);
+
+        var aggregationContexts = aggregationPrograms.get(0).findAggregationContexts(solutionModel);
+        assertEquals(2, aggregationContexts.size());
+        assertEquals(2, aggregationContexts.get(0).getConcreteSolutionInstanceIds().size());
+        assertEquals(2, aggregationContexts.get(1).getConcreteSolutionInstanceIds().size());
+        assertEquals(1, aggregationContexts.get(0).getSolutionModelEdgeIds().size());
+        assertEquals(1, aggregationContexts.get(1).getSolutionModelEdgeIds().size());
+    }
+
+    @Test
+    public void givenSolutionModelThenFindTwoAggregationContext() {
+        var patternLanguage = new PatternLanguage();
+        patternLanguage.setName("Test Pattern Language");
+        patternLanguage.setUri("http://test.com");
+        patternLanguage.setPatternSchema(new PatternSchema());
+        patternLanguage = this.patternLanguageService.createPatternLanguage(patternLanguage);
+
+        var pattern = new Pattern();
+        pattern.setName("Test Pattern");
+        pattern.setUri("http://test.com");
+        pattern.setPatternLanguage(patternLanguage);
+        pattern = this.patternService.createPattern(pattern);
+
+        var request = new CreateConcreteSolutionDescriptorRequest();
+        request.setType("TestType1");
+        request.setRequirements(new HashSet<>(List.of("A")));
+        request.setCapabilities(new HashSet<>(List.of("B")));
+        request.setPatternId(pattern.getId());
+        var cs1 = this.concreteSolutionDescriptorService.createConcreteSolutionDescriptor(request);
+
+        var request2 = new CreateConcreteSolutionDescriptorRequest();
+        request2.setType("TestType2");
+        request2.setRequirements(new HashSet<>(List.of("B")));
+        request2.setCapabilities(new HashSet<>(List.of("C")));
+        request2.setPatternId(pattern.getId());
+        var cs2 = this.concreteSolutionDescriptorService.createConcreteSolutionDescriptor(request2);
+
+        var solutionModel = new SolutionModel();
+        solutionModel.setName("Test Solution Model");
+        solutionModel = this.solutionModelService.createSolutionModel(solutionModel);
+
+        var csi1 = this.solutionModelService.addConcreteSolutionInstance(solutionModel.getId(), cs1.getId());
+        var csi2 = this.solutionModelService.addConcreteSolutionInstance(solutionModel.getId(), cs2.getId());
+        var csi3 = this.solutionModelService.addConcreteSolutionInstance(solutionModel.getId(), cs1.getId());
+        var csi4 = this.solutionModelService.addConcreteSolutionInstance(solutionModel.getId(), cs2.getId());
+
+        AddEdgeToSolutionModelRequest request3 = new AddEdgeToSolutionModelRequest();
+        request3.setDirected(true);
+        request3.setEdgeSemantic("TestEdgeSemantic");
+        request3.setConcreteSolutionInstanceId1(csi1.getId());
+        request3.setConcreteSolutionInstanceId2(csi2.getId());
+        this.solutionModelService.createSolutionModelEdge(solutionModel.getId(), request3);
+
+        AddEdgeToSolutionModelRequest request4 = new AddEdgeToSolutionModelRequest();
+        request4.setDirected(true);
+        request4.setEdgeSemantic("TestEdgeSemantic");
+        request4.setConcreteSolutionInstanceId1(csi3.getId());
+        request4.setConcreteSolutionInstanceId2(csi4.getId());
+        this.solutionModelService.createSolutionModelEdge(solutionModel.getId(), request4);
 
         var aggregationContexts = aggregationEngine.findAllAggregationContexts(solutionModel.getId());
-        assertEquals(1, aggregationContexts.size());
+        assertEquals(2, aggregationContexts.size());
+        assertEquals(2, aggregationContexts.get(0).getConcreteSolutionInstanceIds().size());
+        assertEquals(2, aggregationContexts.get(1).getConcreteSolutionInstanceIds().size());
+        assertEquals(1, aggregationContexts.get(0).getSolutionModelEdgeIds().size());
+        assertEquals(1, aggregationContexts.get(1).getSolutionModelEdgeIds().size());
     }
 }

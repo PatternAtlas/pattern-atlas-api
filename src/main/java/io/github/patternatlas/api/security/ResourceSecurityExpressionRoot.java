@@ -3,31 +3,23 @@ package io.github.patternatlas.api.security;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.patternatlas.api.entities.user.UserEntity;
-import io.github.patternatlas.api.entities.user.role.Role;
+
 import io.github.patternatlas.api.entities.user.role.RoleConstant;
 import io.github.patternatlas.api.exception.UserNotFoundException;
 import io.github.patternatlas.api.repositories.RoleRepository;
-import io.github.patternatlas.api.rest.model.user.RoleModel;
-import io.github.patternatlas.api.rest.model.user.UserModelRequest;
+import io.github.patternatlas.api.rest.dto.user.UserModelRequest;
 import io.github.patternatlas.api.service.RoleService;
 import io.github.patternatlas.api.service.UserAuthService;
 import io.github.patternatlas.api.service.UserService;
-import io.github.patternatlas.api.service.UserServiceImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.expression.SecurityExpressionRoot;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionOperations;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
-import org.springframework.security.oauth2.provider.token.TokenStore;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;

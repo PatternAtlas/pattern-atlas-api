@@ -3,7 +3,7 @@ package io.github.patternatlas.api.entities.designmodel;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.github.patternatlas.api.rest.model.FileDTO;
+import io.github.patternatlas.api.rest.dto.FileDTO;
 import lombok.Data;
 
 @Data

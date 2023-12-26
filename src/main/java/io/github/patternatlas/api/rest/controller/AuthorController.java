@@ -4,14 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import io.github.patternatlas.api.entities.shared.AuthorConstant;
-import io.github.patternatlas.api.rest.model.shared.AuthorModel;
+import io.github.patternatlas.api.rest.dto.shared.AuthorModel;
 import io.github.patternatlas.api.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

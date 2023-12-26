@@ -17,10 +17,10 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.github.patternatlas.api.rest.model.AddDirectedEdgeToViewRequest;
-import io.github.patternatlas.api.rest.model.AddUndirectedEdgeToViewRequest;
-import io.github.patternatlas.api.rest.model.CreateDirectedEdgeRequest;
-import io.github.patternatlas.api.rest.model.CreateUndirectedEdgeRequest;
+import io.github.patternatlas.api.rest.dto.AddDirectedEdgeToViewRequest;
+import io.github.patternatlas.api.rest.dto.AddUndirectedEdgeToViewRequest;
+import io.github.patternatlas.api.rest.dto.CreateDirectedEdgeRequest;
+import io.github.patternatlas.api.rest.dto.CreateUndirectedEdgeRequest;
 import io.github.patternatlas.api.util.IntegrationTestHelper;
 import io.github.patternatlas.api.entities.DirectedEdge;
 import io.github.patternatlas.api.entities.PatternLanguage;

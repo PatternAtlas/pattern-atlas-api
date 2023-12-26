@@ -23,8 +23,8 @@ import io.github.patternatlas.api.exception.PatternLanguageNotFoundException;
 import io.github.patternatlas.api.exception.PatternNotFoundException;
 import io.github.patternatlas.api.exception.UndirectedEdgeNotFoundException;
 import io.github.patternatlas.api.repositories.PatternLanguageRepository;
-import io.github.patternatlas.api.rest.model.CreateDirectedEdgeRequest;
-import io.github.patternatlas.api.rest.model.CreateUndirectedEdgeRequest;
+import io.github.patternatlas.api.rest.dto.CreateDirectedEdgeRequest;
+import io.github.patternatlas.api.rest.dto.CreateUndirectedEdgeRequest;
 import io.github.patternatlas.api.entities.UndirectedEdge;
 
 @Service

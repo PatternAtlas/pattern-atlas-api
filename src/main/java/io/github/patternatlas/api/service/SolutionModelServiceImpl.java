@@ -7,16 +7,16 @@ import javax.persistence.EntityNotFoundException;
 
 import org.springframework.stereotype.Service;
 
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModel;
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModelConcreteSolutionInstance;
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModelEdge;
-import io.github.patternatlas.api.entities.solutionmodel.ConcreteSolutionDescriptor;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModel;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelConcreteSolutionInstance;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelEdge;
+import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
 import io.github.patternatlas.api.repositories.ConcreteSolutionDescriptorRepository;
 import io.github.patternatlas.api.repositories.SolutionModelConcreteSolutionInstanceRepository;
 import io.github.patternatlas.api.repositories.SolutionModelEdgeRepository;
 import io.github.patternatlas.api.repositories.SolutionModelRepository;
-import io.github.patternatlas.api.rest.model.AddEdgeToSolutionModelRequest;
-import io.github.patternatlas.api.rest.model.UpdateSolutionModelEdgeRequest;
+import io.github.patternatlas.api.rest.dto.AddEdgeToSolutionModelRequest;
+import io.github.patternatlas.api.rest.dto.UpdateSolutionModelEdgeRequest;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

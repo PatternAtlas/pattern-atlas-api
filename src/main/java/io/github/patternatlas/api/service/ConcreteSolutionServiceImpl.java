@@ -22,7 +22,7 @@ import io.github.patternatlas.api.exception.AggregationException;
 import io.github.patternatlas.api.exception.ConcreteSolutionNotFoundException;
 import io.github.patternatlas.api.repositories.ConcreteSolutionRepository;
 import io.github.patternatlas.api.repositories.DesignModelEdgeTypeRepository;
-import io.github.patternatlas.api.rest.model.FileDTO;
+import io.github.patternatlas.api.rest.dto.FileDTO;
 import io.github.patternatlas.api.util.aggregator.Aggregator;
 import io.github.patternatlas.api.util.aggregator.AggregatorScanner;
 import lombok.extern.apachecommons.CommonsLog;

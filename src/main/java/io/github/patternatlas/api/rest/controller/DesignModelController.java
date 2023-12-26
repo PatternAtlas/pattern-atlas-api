@@ -1,15 +1,11 @@
 package io.github.patternatlas.api.rest.controller;
 
 import static java.util.stream.Collectors.toList;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.afford;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +14,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.apache.commons.text.CaseUtils;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,10 +27,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.patternatlas.api.rest.model.DesignModelModel;
-import io.github.patternatlas.api.rest.model.EdgeDTO;
-import io.github.patternatlas.api.rest.model.FileDTO;
-import io.github.patternatlas.api.rest.model.PositionDTO;
+import io.github.patternatlas.api.rest.dto.DesignModelModel;
+import io.github.patternatlas.api.rest.dto.EdgeDTO;
+import io.github.patternatlas.api.rest.dto.FileDTO;
+import io.github.patternatlas.api.rest.dto.PositionDTO;
 import io.github.patternatlas.api.service.ConcreteSolutionService;
 import io.github.patternatlas.api.service.DesignModelService;
 import io.github.patternatlas.api.entities.Pattern;
@@ -47,7 +39,7 @@ import io.github.patternatlas.api.entities.designmodel.DesignModel;
 import io.github.patternatlas.api.entities.designmodel.DesignModelEdgeType;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternEdge;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternInstance;
-import io.github.patternatlas.api.rest.model.PatternInstanceDTO;
+import io.github.patternatlas.api.rest.dto.PatternInstanceDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

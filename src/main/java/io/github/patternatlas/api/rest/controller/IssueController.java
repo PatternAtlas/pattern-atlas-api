@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import io.github.patternatlas.api.rest.model.issue.IssueModel;
-import io.github.patternatlas.api.rest.model.issue.IssueModelRequest;
-import io.github.patternatlas.api.rest.model.shared.AuthorModelRequest;
-import io.github.patternatlas.api.rest.model.shared.CommentModel;
-import io.github.patternatlas.api.rest.model.shared.EvidenceModel;
-import io.github.patternatlas.api.rest.model.shared.RatingModelRequest;
+import io.github.patternatlas.api.rest.dto.issue.IssueModel;
+import io.github.patternatlas.api.rest.dto.issue.IssueModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.AuthorModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.CommentModel;
+import io.github.patternatlas.api.rest.dto.shared.EvidenceModel;
+import io.github.patternatlas.api.rest.dto.shared.RatingModelRequest;
 import io.github.patternatlas.api.service.IssueService;
 import io.github.patternatlas.api.service.PatternLanguageService;
 

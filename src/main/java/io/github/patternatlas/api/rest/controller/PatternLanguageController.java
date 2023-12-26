@@ -27,9 +27,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.patternatlas.api.entities.PatternLanguage;
 import io.github.patternatlas.api.entities.PatternSchema;
-import io.github.patternatlas.api.rest.model.GraphModel;
-import io.github.patternatlas.api.rest.model.PatternLanguageModel;
-import io.github.patternatlas.api.rest.model.shared.PatternLanguageSchemaModel;
+import io.github.patternatlas.api.rest.dto.GraphModel;
+import io.github.patternatlas.api.rest.dto.PatternLanguageModel;
+import io.github.patternatlas.api.rest.dto.shared.PatternLanguageSchemaModel;
 import io.github.patternatlas.api.service.PatternLanguageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

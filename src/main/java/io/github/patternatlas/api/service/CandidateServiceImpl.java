@@ -22,14 +22,14 @@ import io.github.patternatlas.api.repositories.CandidateEvidenceRatingRepository
 import io.github.patternatlas.api.repositories.CandidateEvidenceRepository;
 import io.github.patternatlas.api.repositories.CandidateRatingRepository;
 import io.github.patternatlas.api.repositories.CandidateRepository;
-import io.github.patternatlas.api.rest.model.candidate.CandidateModelRequest;
-import io.github.patternatlas.api.rest.model.shared.AuthorModel;
-import io.github.patternatlas.api.rest.model.shared.AuthorModelRequest;
-import io.github.patternatlas.api.rest.model.shared.CommentModel;
-import io.github.patternatlas.api.rest.model.shared.EvidenceModel;
-import io.github.patternatlas.api.rest.model.shared.RatingModelMultiRequest;
-import io.github.patternatlas.api.rest.model.shared.RatingModelRequest;
-import io.github.patternatlas.api.rest.model.shared.RatingType;
+import io.github.patternatlas.api.rest.dto.candidate.CandidateModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.AuthorModel;
+import io.github.patternatlas.api.rest.dto.shared.AuthorModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.CommentModel;
+import io.github.patternatlas.api.rest.dto.shared.EvidenceModel;
+import io.github.patternatlas.api.rest.dto.shared.RatingModelMultiRequest;
+import io.github.patternatlas.api.rest.dto.shared.RatingModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.RatingType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

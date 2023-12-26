@@ -5,7 +5,7 @@ import java.util.Collections;
 import io.github.patternatlas.api.entities.designmodel.AggregationData;
 import io.github.patternatlas.api.entities.designmodel.ConcreteSolution;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternInstance;
-import io.github.patternatlas.api.rest.model.FileDTO;
+import io.github.patternatlas.api.rest.dto.FileDTO;
 import lombok.extern.apachecommons.CommonsLog;
 
 @CommonsLog

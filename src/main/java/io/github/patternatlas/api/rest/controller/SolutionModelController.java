@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModel;
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModelConcreteSolutionInstance;
-import io.github.patternatlas.api.entities.solutionmodel.SolutionModelEdge;
-import io.github.patternatlas.api.rest.model.AddEdgeToSolutionModelRequest;
-import io.github.patternatlas.api.rest.model.UUIDDTO;
-import io.github.patternatlas.api.rest.model.UpdateSolutionModelEdgeRequest;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModel;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelConcreteSolutionInstance;
+import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelEdge;
+import io.github.patternatlas.api.rest.dto.AddEdgeToSolutionModelRequest;
+import io.github.patternatlas.api.rest.dto.UUIDDTO;
+import io.github.patternatlas.api.rest.dto.UpdateSolutionModelEdgeRequest;
 import io.github.patternatlas.api.service.SolutionModelService;
 import lombok.AllArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;

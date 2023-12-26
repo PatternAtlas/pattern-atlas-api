@@ -30,7 +30,7 @@ import io.github.patternatlas.api.entities.issue.author.IssueAuthor;
 import io.github.patternatlas.api.entities.issue.IssueRating;
 import io.github.patternatlas.api.entities.issue.evidence.IssueEvidence;
 import io.github.patternatlas.api.entities.user.role.Role;
-import io.github.patternatlas.api.rest.model.user.UserModel;
+import io.github.patternatlas.api.rest.dto.user.UserModel;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

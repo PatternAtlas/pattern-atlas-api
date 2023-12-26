@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.patternatlas.api.entities.Image;
 import io.github.patternatlas.api.entities.Pattern;
-import io.github.patternatlas.api.rest.model.LatexContent;
+import io.github.patternatlas.api.rest.dto.LatexContent;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

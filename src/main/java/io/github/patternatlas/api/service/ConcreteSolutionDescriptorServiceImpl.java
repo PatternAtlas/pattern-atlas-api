@@ -1,16 +1,17 @@
 package io.github.patternatlas.api.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import io.github.patternatlas.api.entities.Pattern;
-import io.github.patternatlas.api.entities.solutionmodel.ConcreteSolutionDescriptor;
+import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
 import io.github.patternatlas.api.repositories.ConcreteSolutionDescriptorRepository;
 import io.github.patternatlas.api.repositories.PatternRepository;
-import io.github.patternatlas.api.rest.model.CreateConcreteSolutionDescriptorRequest;
-import io.github.patternatlas.api.rest.model.UpdateConcreteSolutionDescriptorRequest;
+import io.github.patternatlas.api.rest.dto.CreateConcreteSolutionDescriptorRequest;
+import io.github.patternatlas.api.rest.dto.UpdateConcreteSolutionDescriptorRequest;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -50,7 +51,7 @@ public class ConcreteSolutionDescriptorServiceImpl implements ConcreteSolutionDe
     }
 
     @Override
-    public ConcreteSolutionDescriptor updateConcreteSolutionDescriptor(java.util.UUID id, UpdateConcreteSolutionDescriptorRequest request) {
+    public ConcreteSolutionDescriptor updateConcreteSolutionDescriptor(UUID id, UpdateConcreteSolutionDescriptorRequest request) {
         request.setId(id);
         ConcreteSolutionDescriptor concreteSolutionDescriptor = this.concreteSolutionDescriptorRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Concrete Solution Descriptor not found!"));

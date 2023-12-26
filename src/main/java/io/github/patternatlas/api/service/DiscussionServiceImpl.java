@@ -11,7 +11,7 @@ import org.springframework.validation.annotation.Validated;
 
 import io.github.patternatlas.api.repositories.DiscussionCommentRepository;
 import io.github.patternatlas.api.repositories.DiscussionTopicRepository;
-import io.github.patternatlas.api.rest.model.DiscussionTopicModel;
+import io.github.patternatlas.api.rest.dto.DiscussionTopicModel;
 import io.github.patternatlas.api.entities.DiscussionComment;
 import io.github.patternatlas.api.entities.DiscussionTopic;
 

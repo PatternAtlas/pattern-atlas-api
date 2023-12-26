@@ -25,11 +25,11 @@ import io.github.patternatlas.api.repositories.IssueEvidenceRatingRepository;
 import io.github.patternatlas.api.repositories.IssueEvidenceRepository;
 import io.github.patternatlas.api.repositories.IssueRatingRepository;
 import io.github.patternatlas.api.repositories.IssueRepository;
-import io.github.patternatlas.api.rest.model.issue.IssueModelRequest;
-import io.github.patternatlas.api.rest.model.shared.AuthorModelRequest;
-import io.github.patternatlas.api.rest.model.shared.CommentModel;
-import io.github.patternatlas.api.rest.model.shared.EvidenceModel;
-import io.github.patternatlas.api.rest.model.shared.RatingModelRequest;
+import io.github.patternatlas.api.rest.dto.issue.IssueModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.AuthorModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.CommentModel;
+import io.github.patternatlas.api.rest.dto.shared.EvidenceModel;
+import io.github.patternatlas.api.rest.dto.shared.RatingModelRequest;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;

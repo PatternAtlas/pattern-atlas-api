@@ -26,10 +26,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.github.patternatlas.api.entities.Pattern;
 import io.github.patternatlas.api.entities.PatternLanguage;
-import io.github.patternatlas.api.entities.solutionmodel.ConcreteSolutionDescriptor;
-import io.github.patternatlas.api.rest.model.PatternContentModel;
-import io.github.patternatlas.api.rest.model.PatternModel;
-import io.github.patternatlas.api.rest.model.PatternRenderedContentModel;
+import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
+import io.github.patternatlas.api.rest.dto.PatternContentModel;
+import io.github.patternatlas.api.rest.dto.PatternModel;
+import io.github.patternatlas.api.rest.dto.PatternRenderedContentModel;
 import io.github.patternatlas.api.service.PatternLanguageService;
 import io.github.patternatlas.api.service.PatternRenderService;
 import io.github.patternatlas.api.service.PatternService;

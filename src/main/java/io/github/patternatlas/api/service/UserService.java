@@ -3,8 +3,8 @@ package io.github.patternatlas.api.service;
 import io.github.patternatlas.api.entities.user.role.Privilege;
 import io.github.patternatlas.api.entities.user.role.Role;
 import io.github.patternatlas.api.entities.user.UserEntity;
-import io.github.patternatlas.api.rest.model.user.RoleModelRequest;
-import io.github.patternatlas.api.rest.model.user.UserModelRequest;
+import io.github.patternatlas.api.rest.dto.user.RoleModelRequest;
+import io.github.patternatlas.api.rest.dto.user.UserModelRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;

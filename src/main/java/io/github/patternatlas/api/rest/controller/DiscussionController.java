@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.patternatlas.api.rest.model.DiscussionTopicModel;
+import io.github.patternatlas.api.rest.dto.DiscussionTopicModel;
 import io.github.patternatlas.api.entities.DiscussionComment;
 import io.github.patternatlas.api.entities.DiscussionTopic;
 import io.github.patternatlas.api.service.DiscussionService;

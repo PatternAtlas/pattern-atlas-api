@@ -13,7 +13,7 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import io.github.patternatlas.api.entities.solutionmodel.ConcreteSolutionDescriptor;
+import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

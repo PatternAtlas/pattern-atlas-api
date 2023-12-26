@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.patternatlas.api.rest.model.DiscussionTopicModel;
+import io.github.patternatlas.api.rest.dto.DiscussionTopicModel;
 import io.github.patternatlas.api.entities.DiscussionComment;
 import io.github.patternatlas.api.entities.DiscussionTopic;
 

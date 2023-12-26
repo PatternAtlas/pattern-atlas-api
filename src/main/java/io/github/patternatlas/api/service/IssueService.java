@@ -2,20 +2,15 @@ package io.github.patternatlas.api.service;
 
 import java.util.List;
 
-import io.github.patternatlas.api.entities.issue.IssueRating;
-import io.github.patternatlas.api.entities.issue.author.IssueAuthor;
 import io.github.patternatlas.api.entities.issue.comment.IssueComment;
 import io.github.patternatlas.api.entities.issue.Issue;
-import io.github.patternatlas.api.entities.issue.comment.IssueCommentRating;
 import io.github.patternatlas.api.entities.issue.evidence.IssueEvidence;
-import io.github.patternatlas.api.entities.issue.evidence.IssueEvidenceRating;
-import io.github.patternatlas.api.rest.model.issue.IssueModelRequest;
-import io.github.patternatlas.api.rest.model.shared.AuthorModelRequest;
-import io.github.patternatlas.api.rest.model.shared.CommentModel;
-import io.github.patternatlas.api.rest.model.shared.EvidenceModel;
-import io.github.patternatlas.api.rest.model.shared.RatingModelRequest;
+import io.github.patternatlas.api.rest.dto.issue.IssueModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.AuthorModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.CommentModel;
+import io.github.patternatlas.api.rest.dto.shared.EvidenceModel;
+import io.github.patternatlas.api.rest.dto.shared.RatingModelRequest;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;

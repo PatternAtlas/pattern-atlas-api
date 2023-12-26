@@ -2,13 +2,13 @@ package io.github.patternatlas.api.rest.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.github.patternatlas.api.rest.model.candidate.CandidateModel;
-import io.github.patternatlas.api.rest.model.candidate.CandidateModelRequest;
-import io.github.patternatlas.api.rest.model.shared.AuthorModelRequest;
-import io.github.patternatlas.api.rest.model.shared.CommentModel;
-import io.github.patternatlas.api.rest.model.shared.EvidenceModel;
-import io.github.patternatlas.api.rest.model.shared.RatingModelMultiRequest;
-import io.github.patternatlas.api.rest.model.shared.RatingModelRequest;
+import io.github.patternatlas.api.rest.dto.candidate.CandidateModel;
+import io.github.patternatlas.api.rest.dto.candidate.CandidateModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.AuthorModelRequest;
+import io.github.patternatlas.api.rest.dto.shared.CommentModel;
+import io.github.patternatlas.api.rest.dto.shared.EvidenceModel;
+import io.github.patternatlas.api.rest.dto.shared.RatingModelMultiRequest;
+import io.github.patternatlas.api.rest.dto.shared.RatingModelRequest;
 import io.github.patternatlas.api.service.CandidateService;
 import io.github.patternatlas.api.service.PatternLanguageService;
 
@@ -19,8 +19,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

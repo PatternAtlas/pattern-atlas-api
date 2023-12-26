@@ -8,7 +8,7 @@ import java.util.Map;
 import io.github.patternatlas.api.entities.designmodel.AggregationData;
 import io.github.patternatlas.api.entities.designmodel.ConcreteSolution;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternInstance;
-import io.github.patternatlas.api.rest.model.FileDTO;
+import io.github.patternatlas.api.rest.dto.FileDTO;
 
 @AggregatorMetadata(sourceTypes = {"AWS-CloudFormation-JSON"}, targetTypes = {"", "AWS-CloudFormation-JSON"})
 public class AWSCloudFormationJsonAggregator extends ActiveMQAggregator {
