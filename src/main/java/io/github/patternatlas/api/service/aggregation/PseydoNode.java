@@ -28,8 +28,12 @@ public class PseydoNode {
 
     public static PseydoNode from(SolutionModelConcreteSolutionInstance solutionModelConcreteSolutionInstance) {
         var pseydoNode = new PseydoNode();
-        pseydoNode.setCapabilities(new HashSet<>(solutionModelConcreteSolutionInstance.getConcreteSolutionDescriptor().getCapabilities()));
-        pseydoNode.setRequirements(new HashSet<>(solutionModelConcreteSolutionInstance.getConcreteSolutionDescriptor().getRequirements()));
+        var caps = solutionModelConcreteSolutionInstance.getConcreteSolutionDescriptor().getCapabilities() != null ?
+            solutionModelConcreteSolutionInstance.getConcreteSolutionDescriptor().getCapabilities() : new HashSet<String>();
+        var reqs = solutionModelConcreteSolutionInstance.getConcreteSolutionDescriptor().getRequirements() != null ?
+            solutionModelConcreteSolutionInstance.getConcreteSolutionDescriptor().getRequirements() : new HashSet<String>();
+        pseydoNode.setCapabilities(new HashSet<>(caps));
+        pseydoNode.setRequirements(new HashSet<>(reqs));
         pseydoNode.setType(solutionModelConcreteSolutionInstance.getConcreteSolutionDescriptor().getType());
         pseydoNode.setId(solutionModelConcreteSolutionInstance.getId());
         return pseydoNode;

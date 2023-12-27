@@ -90,7 +90,7 @@ public class SolutionModelServiceImpl implements SolutionModelService {
 
         SolutionModelConcreteSolutionInstance sourceConcreteSolutionInstance2 =
             this.solutionModelConcreteSolutionInstanceRepository.findById(solutionModelEdgeRequest.getConcreteSolutionInstanceId2())
-                .orElseThrow(() -> new EntityNotFoundException("Source Concrete Solution Instance not found!"));
+                .orElseThrow(() -> new EntityNotFoundException("Target Concrete Solution Instance not found!"));
 
         SolutionModelEdge solutionModelEdge = new SolutionModelEdge();
         solutionModelEdge.setSolutionModel(solutionModel);

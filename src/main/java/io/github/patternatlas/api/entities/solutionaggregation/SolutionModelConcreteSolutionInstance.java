@@ -1,12 +1,15 @@
 package io.github.patternatlas.api.entities.solutionaggregation;
 
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,6 +38,10 @@ public class SolutionModelConcreteSolutionInstance {
     @ManyToOne
     @JoinColumn(name = "solution_model_id")
     private SolutionModel solutionModel;
+
+    @Type(type = "jsonb")
+    @Column(columnDefinition = "jsonb")
+    private Object properties;
 
     public SolutionModelConcreteSolutionInstance(SolutionModel solutionModel, ConcreteSolutionDescriptor concreteSolutionDescriptor) {
         this.solutionModel = solutionModel;

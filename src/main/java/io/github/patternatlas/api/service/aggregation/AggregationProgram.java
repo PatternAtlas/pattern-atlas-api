@@ -12,7 +12,7 @@ public interface AggregationProgram {
 
     DetectorGraph getDetectorGraph();
     List<AggregationContext> findAggregationContexts(SolutionModel solutionModel);
-    boolean canAggregate(SolutionModel aggregationContext);
+    boolean canAggregate(AggregationContext aggregationContext);
 
     ConcreteSolutionDescriptor aggregate(AggregationContext aggregationContext);
 

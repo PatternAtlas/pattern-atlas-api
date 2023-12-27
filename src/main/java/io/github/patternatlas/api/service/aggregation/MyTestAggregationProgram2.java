@@ -24,14 +24,14 @@ import lombok.extern.apachecommons.CommonsLog;
 @Getter
 @CommonsLog
 @Component
-public class MyTestAggregationProgram implements AggregationProgram {
+public class MyTestAggregationProgram2 implements AggregationProgram {
 
 
     private DetectorGraph detectorGraph;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public MyTestAggregationProgram() {
+    public MyTestAggregationProgram2() {
         this.setupDetectorGraph();
     }
 
@@ -42,22 +42,21 @@ public class MyTestAggregationProgram implements AggregationProgram {
     private void setupDetectorGraph() {
         var graph = new DetectorGraph();
         Set<String> requirements1 = new HashSet<>(List.of("A"));
-        Set<String> capabilities1 = new HashSet<>(List.of("B"));
+        Set<String> capabilities1 = new HashSet<>(List.of("C"));
         var ot1 = OperationTarget.builder()
-            .type("TestType1")
+            .type("FirstAggregate")
             .requirements(requirements1)
             .capabilities(capabilities1)
-            .id(UUID.fromString("de520326-6356-4a62-b57e-359bfd986835"))
+            .id(UUID.fromString("de520326-6356-4a62-b57e-359bfd986836"))
             .build();
         graph.operationTargets.add(ot1);
 
-        Set<String> requirements2 = new HashSet<>(List.of("B"));
-        Set<String> capabilities2 = new HashSet<>(List.of("C"));
+        Set<String> requirements2 = new HashSet<>(List.of("C"));
         var ot2 = OperationTarget.builder()
             .type("TestType2")
             .requirements(requirements2)
-            .capabilities(capabilities2)
-            .id(UUID.fromString("1ca8024a-f19a-4994-b195-7d96105238cb"))
+            .capabilities(new HashSet<>())
+            .id(UUID.fromString("1ca8024a-f19a-4994-b195-7d96105238cc"))
             .build();
         graph.operationTargets.add(ot2);
 
@@ -132,7 +131,7 @@ public class MyTestAggregationProgram implements AggregationProgram {
     }
 
     @Override
-    public boolean canAggregate(SolutionModel aggregationContext) {
+    public boolean canAggregate(AggregationContext aggregationContext) {
         return true;
     }
 

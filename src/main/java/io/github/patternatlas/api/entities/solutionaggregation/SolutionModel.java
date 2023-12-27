@@ -39,4 +39,6 @@ public class SolutionModel {
     @JoinColumn(name = "design_model_id")
     private DesignModel designModel;
 
+    private UUID previousSolutionModelId;
+
 }
