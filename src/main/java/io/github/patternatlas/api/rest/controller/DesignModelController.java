@@ -36,13 +36,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.patternatlas.api.rest.model.ConcreteSolutionModel;
+import io.github.patternatlas.api.rest.model.DesignModelModel;
 import io.github.patternatlas.api.rest.model.EdgeDTO;
 import io.github.patternatlas.api.rest.model.FileDTO;
 import io.github.patternatlas.api.rest.model.PositionDTO;
 import io.github.patternatlas.api.service.ConcreteSolutionService;
 import io.github.patternatlas.api.service.DesignModelService;
 import io.github.patternatlas.api.entities.Pattern;
-import io.github.patternatlas.api.entities.designmodel.ConcreteSolution;
 import io.github.patternatlas.api.entities.designmodel.DesignModel;
 import io.github.patternatlas.api.entities.designmodel.DesignModelEdgeType;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternEdge;
@@ -54,7 +55,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.apachecommons.CommonsLog;
 
 @RestController
-@ConditionalOnExpression(value = "false")  // TODO: set to true if the design models should be used again
+@ConditionalOnExpression(value = "true")  // TODO: set to true if the design models should be used again
 @CommonsLog
 @CrossOrigin(allowedHeaders = "*", origins = "*")
 @RequestMapping(value = "/design-models", produces = "application/hal+json")
@@ -102,11 +103,11 @@ public class DesignModelController {
     }
 
     @GetMapping("")
-    public CollectionModel<EntityModel<DesignModel>> getDesignModels() {
+    public CollectionModel<EntityModel<DesignModelModel>> getDesignModels() {
 
-        List<EntityModel<DesignModel>> designModels = this.designModelService.getAllDesignModels()
+        List<EntityModel<DesignModelModel>> designModels = this.designModelService.getAllDesignModels()
                 .stream()
-                .map(designModel -> new EntityModel<>(designModel, getDesignModelLinks(designModel.getId(), "designModel")))
+                .map(designModel -> new EntityModel<>(DesignModelModel.from(designModel), getDesignModelLinks(designModel.getId(), "designModel")))
                 .collect(toList());
 
         return new CollectionModel<>(designModels, getDesignModelCollectionLinks());
@@ -137,10 +138,10 @@ public class DesignModelController {
     }
 
     @GetMapping("/{designModelId}")
-    public EntityModel<DesignModel> getDesignModel(@PathVariable UUID designModelId) {
+    public EntityModel<DesignModelModel> getDesignModel(@PathVariable UUID designModelId) {
         DesignModel designModel = this.designModelService.getDesignModel(designModelId);
 
-        return new EntityModel<>(designModel, getDesignModelLinks(designModel.getId(), "designModel"));
+        return new EntityModel<>(DesignModelModel.from(designModel), getDesignModelLinks(designModel.getId(), "designModel"));
     }
 
     @GetMapping("/{designModelId}/patterns")
@@ -215,13 +216,15 @@ public class DesignModelController {
     }
 
     @GetMapping("/{designModelId}/concrete-solutions")
-    public CollectionModel<ConcreteSolution> checkConcreteSolutions(@PathVariable UUID designModelId) {
+    public CollectionModel<ConcreteSolutionModel> checkConcreteSolutions(@PathVariable UUID designModelId) {
         List<DesignModelPatternInstance> patternInstanceList = this.designModelService.getDesignModel(designModelId).getPatterns();
-        Set<String> patternUris = patternInstanceList.stream().map(patternInstance -> patternInstance.getPattern().getUri()).collect(Collectors.toSet());
-        Set<ConcreteSolution> concreteSolutionSet = new HashSet<>();
+        Set<String> patternUris = patternInstanceList.stream()
+            .map(patternInstance -> patternInstance.getPattern().getUri()).collect(Collectors.toSet());
+        Set<ConcreteSolutionModel> concreteSolutionSet = new HashSet<>();
 
         for (String uri : patternUris) {
-            this.concreteSolutionService.getConcreteSolutions(URI.create(uri)).forEach(concreteSolution -> concreteSolutionSet.add(concreteSolution));
+            this.concreteSolutionService.getConcreteSolutions(URI.create(uri))
+                .forEach(concreteSolution -> concreteSolutionSet.add(ConcreteSolutionModel.from(concreteSolution)));
         }
 
         return new CollectionModel<>(concreteSolutionSet, getDesignModelLinks(designModelId, "concreteSolutions"));

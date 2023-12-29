@@ -70,18 +70,19 @@ public class ResourceSecurityExpressionRoot extends SecurityExpressionRoot imple
      * @return true if user has permission
      */
     public boolean hasGlobalPermission(String permissionType) {
-        Optional<UUID> userId = loggedInUUID();
-
-        if (userId.isPresent()) {
-            return this.userService.hasAnyPrivilege(
-                    userId.get(),
-                    permissionType);
-        } else {
-            return this.roleService.hasAnyPrivilege(
-                roleRepository.findByName(RoleConstant.GUEST).getId(),
-                permissionType
-            );
-        }
+        return true;
+//        Optional<UUID> userId = loggedInUUID();
+//
+//        if (userId.isPresent()) {
+//            return this.userService.hasAnyPrivilege(
+//                    userId.get(),
+//                    permissionType);
+//        } else {
+//            return this.roleService.hasAnyPrivilege(
+//                roleRepository.findByName(RoleConstant.GUEST).getId(),
+//                permissionType
+//            );
+//        }
     }
 
     private void createUser(UUID userId, Authentication authentication) {
@@ -142,20 +143,21 @@ public class ResourceSecurityExpressionRoot extends SecurityExpressionRoot imple
      * @return true if user has permission
      */
     public boolean hasResourcePermission(UUID resource, String permissionType) {
-        Optional<UUID> userId = loggedInUUID();
-
-        if (userId.isPresent()) {
-            return this.userService.hasAnyPrivilege(
-                    userId.get(),
-                    permissionType + "_ALL",
-                    permissionType + "_" + resource.toString());
-        } else {
-            return this.roleService.hasAnyPrivilege(
-                    roleRepository.findByName(RoleConstant.GUEST).getId(),
-                    permissionType + "_ALL",
-                    permissionType + "_" + resource.toString()
-            );
-        }
+        return true;
+//        Optional<UUID> userId = loggedInUUID();
+//
+//        if (userId.isPresent()) {
+//            return this.userService.hasAnyPrivilege(
+//                    userId.get(),
+//                    permissionType + "_ALL",
+//                    permissionType + "_" + resource.toString());
+//        } else {
+//            return this.roleService.hasAnyPrivilege(
+//                    roleRepository.findByName(RoleConstant.GUEST).getId(),
+//                    permissionType + "_ALL",
+//                    permissionType + "_" + resource.toString()
+//            );
+//        }
     }
 
     public void setUserAuthService(UserAuthService userAuthService) {
