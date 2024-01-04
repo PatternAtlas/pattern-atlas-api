@@ -28,4 +28,13 @@ public class StringTemplateTest {
         assertTrue(rendered, rendered.contains("World"));
     }
 
+    @Test
+    public void givenStringTemplateWithInputPlaceholderThenReplacePlaceholder() {
+        String template = "<from uri=\"activemq:$input$\"/>";
+        String id = "testId";
+        var adaptedString = template.replaceAll("\\$(.*?)(input|output|configuration)(.*?)(\\$|:\\{)", "\\$$1" + id + "-$2$3$4");
+
+        assertTrue(adaptedString.contains("$" + id + "-input$"));
+    }
+
 }
