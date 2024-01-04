@@ -12,6 +12,7 @@ public class UpdateConcreteSolutionDescriptorRequest {
     private UUID id;
     private String name;
     private String templateUri;
+    private String template;
     private Object properties;
     private Object selectionCriteria;
     private Set<String> requirements;

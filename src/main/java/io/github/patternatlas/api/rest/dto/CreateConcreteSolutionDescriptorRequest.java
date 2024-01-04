@@ -11,18 +11,12 @@ import lombok.NoArgsConstructor;
 @Data
 public class CreateConcreteSolutionDescriptorRequest {
     private String name;
-
     private String templateUri;
-
+    private String template;
     private Object properties;
-
     private Object selectionCriteria;
-
     private Set<String> requirements;
-
     private Set<String> capabilities;
-
     private UUID patternId;
-
     private String type;
 }

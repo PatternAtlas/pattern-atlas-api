@@ -41,6 +41,7 @@ public class ConcreteSolutionDescriptorServiceImpl implements ConcreteSolutionDe
         concreteSolutionDescriptor.setPattern(pattern);
         concreteSolutionDescriptor.setName(request.getName());
         concreteSolutionDescriptor.setTemplateUri(request.getTemplateUri());
+        concreteSolutionDescriptor.setTemplate(request.getTemplate());
         concreteSolutionDescriptor.setType(request.getType());
         concreteSolutionDescriptor.setProperties(request.getProperties());
         concreteSolutionDescriptor.setSelectionCriteria(request.getSelectionCriteria());
@@ -62,6 +63,7 @@ public class ConcreteSolutionDescriptorServiceImpl implements ConcreteSolutionDe
         concreteSolutionDescriptor.setPattern(pattern);
         concreteSolutionDescriptor.setName(request.getName());
         concreteSolutionDescriptor.setTemplateUri(request.getTemplateUri());
+        concreteSolutionDescriptor.setTemplate(request.getTemplate());
         concreteSolutionDescriptor.setType(request.getType());
         concreteSolutionDescriptor.setProperties(request.getProperties());
         concreteSolutionDescriptor.setSelectionCriteria(request.getSelectionCriteria());
@@ -75,4 +77,5 @@ public class ConcreteSolutionDescriptorServiceImpl implements ConcreteSolutionDe
     public void deleteConcreteSolutionDescriptor(java.util.UUID id) {
         this.concreteSolutionDescriptorRepository.deleteById(id);
     }
+
 }

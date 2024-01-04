@@ -2,11 +2,13 @@ package io.github.patternatlas.api.entities.solutionaggregation;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -31,7 +33,7 @@ public class ConcreteSolutionDescriptor {
 
     @Id
     @GeneratedValue(generator = "pg-uuid")
-    private java.util.UUID id;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "pattern_id")
@@ -40,6 +42,9 @@ public class ConcreteSolutionDescriptor {
     private String name;
 
     private String templateUri;
+
+    @Lob
+    private String template;
 
     private String type;
 
