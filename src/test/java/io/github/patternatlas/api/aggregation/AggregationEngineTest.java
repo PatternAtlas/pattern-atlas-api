@@ -26,6 +26,7 @@ import io.github.patternatlas.api.service.ConcreteSolutionDescriptorService;
 import io.github.patternatlas.api.service.PatternLanguageService;
 import io.github.patternatlas.api.service.PatternService;
 import io.github.patternatlas.api.service.SolutionModelService;
+import io.github.patternatlas.api.service.aggregation.AggregationContextFinder;
 import io.github.patternatlas.api.service.aggregation.AggregationEngine;
 import io.github.patternatlas.api.service.aggregation.AggregationProgram;
 import io.github.patternatlas.api.service.aggregation.MyTestAggregationProgram1;
@@ -48,6 +49,9 @@ public class AggregationEngineTest extends IntegrationTest {
 
     @Autowired
     AggregationEngine aggregationEngine;
+
+    @Autowired
+    AggregationContextFinder aggregationContextFinder;
 
     @Autowired
     List<AggregationProgram> aggregationPrograms;
@@ -158,7 +162,7 @@ public class AggregationEngineTest extends IntegrationTest {
         request4.setConcreteSolutionInstanceId2(csi4.getId());
         this.solutionModelService.createSolutionModelEdge(solutionModel.getId(), request4);
 
-        var aggregationContexts = aggregationEngine.findAggregationContexts(solutionModel.getId());
+        var aggregationContexts = aggregationContextFinder.findAggregationContexts(solutionModel.getId());
         assertEquals(2, aggregationContexts.size());
         assertEquals(2, aggregationContexts.get(0).getConcreteSolutionInstanceIds().size());
         assertEquals(2, aggregationContexts.get(1).getConcreteSolutionInstanceIds().size());
@@ -217,7 +221,7 @@ public class AggregationEngineTest extends IntegrationTest {
         request4.setConcreteSolutionInstanceId2(csi4.getId());
         this.solutionModelService.createSolutionModelEdge(solutionModel.getId(), request4);
 
-        var aggregationContexts = aggregationEngine.findAggregationContexts(solutionModel.getId());
+        var aggregationContexts = aggregationContextFinder.findAggregationContexts(solutionModel.getId());
 
         var request5 = new CreateConcreteSolutionDescriptorRequest();
         request5.setType("AggregatedCsType");
@@ -292,7 +296,7 @@ public class AggregationEngineTest extends IntegrationTest {
         request4.setConcreteSolutionInstanceId2(csi3.getId());
         this.solutionModelService.createSolutionModelEdge(solutionModel.getId(), request4);
 
-        var aggregationContexts = aggregationEngine.findAggregationContexts(solutionModel.getId());
+        var aggregationContexts = aggregationContextFinder.findAggregationContexts(solutionModel.getId());
 
         var request5 = new CreateConcreteSolutionDescriptorRequest();
         request5.setType("FirstAggregate");
@@ -307,9 +311,9 @@ public class AggregationEngineTest extends IntegrationTest {
             MyTestAggregationProgram1.class.getName())).findFirst().get();
         var newSolutionModel = aggregationEngine.updateSolutionModel(solutionModel, firstAggregationContext, newCs1);
 
-        aggregationContexts = aggregationEngine.findAggregationContexts(newSolutionModel.getId());
+        aggregationContexts = aggregationContextFinder.findAggregationContexts(newSolutionModel.getId());
 
-        var secondAggregationContext =  aggregationContexts.stream().filter(context -> context.getAggregationProgramName().equals(
+        var secondAggregationContext = aggregationContexts.stream().filter(context -> context.getAggregationProgramName().equals(
             MyTestAggregationProgram2.class.getName())).findFirst().get();
 
         var request6 = new CreateConcreteSolutionDescriptorRequest();
