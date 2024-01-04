@@ -1,6 +1,7 @@
 package io.github.patternatlas.api.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
 import io.github.patternatlas.api.rest.dto.CreateConcreteSolutionDescriptorRequest;
@@ -10,12 +11,12 @@ public interface ConcreteSolutionDescriptorService {
 
     List<ConcreteSolutionDescriptor> getAllConcreteSolutionDescriptors();
 
-    ConcreteSolutionDescriptor getConcreteSolutionDescriptor(java.util.UUID id);
+    ConcreteSolutionDescriptor getConcreteSolutionDescriptor(UUID id);
 
     ConcreteSolutionDescriptor createConcreteSolutionDescriptor(CreateConcreteSolutionDescriptorRequest request);
 
-    ConcreteSolutionDescriptor updateConcreteSolutionDescriptor(java.util.UUID id, UpdateConcreteSolutionDescriptorRequest request);
+    ConcreteSolutionDescriptor updateConcreteSolutionDescriptor(UUID id, UpdateConcreteSolutionDescriptorRequest request);
 
-    void deleteConcreteSolutionDescriptor(java.util.UUID id);
+    void deleteConcreteSolutionDescriptor(UUID id);
 
 }

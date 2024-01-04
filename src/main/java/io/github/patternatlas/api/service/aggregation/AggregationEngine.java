@@ -91,4 +91,5 @@ public class AggregationEngine {
         }
         return this.solutionModelService.getSolutionModel(newSolutionModel.getId());
     }
+
 }

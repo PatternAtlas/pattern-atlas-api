@@ -2,6 +2,7 @@ package io.github.patternatlas.api.rest.controller;
 
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +36,7 @@ public class ConcreteSolutionDescriptorController {
     }
 
     @GetMapping("/{id}")
-    public ConcreteSolutionDescriptor getConcreteSolutionDescriptor(@PathVariable java.util.UUID id) {
+    public ConcreteSolutionDescriptor getConcreteSolutionDescriptor(@PathVariable UUID id) {
         return this.concreteSolutionDescriptorService.getConcreteSolutionDescriptor(id);
     }
 
@@ -45,12 +46,13 @@ public class ConcreteSolutionDescriptorController {
     }
 
     @PutMapping("/{id}")
-    public ConcreteSolutionDescriptor updateConcreteSolutionDescriptor(@PathVariable java.util.UUID id, @RequestBody UpdateConcreteSolutionDescriptorRequest updateRequest) {
+    public ConcreteSolutionDescriptor updateConcreteSolutionDescriptor(@PathVariable UUID id,
+                                                                       @RequestBody UpdateConcreteSolutionDescriptorRequest updateRequest) {
         return this.concreteSolutionDescriptorService.updateConcreteSolutionDescriptor(id, updateRequest);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteConcreteSolutionDescriptor(@PathVariable java.util.UUID id) {
+    public void deleteConcreteSolutionDescriptor(@PathVariable UUID id) {
         this.concreteSolutionDescriptorService.deleteConcreteSolutionDescriptor(id);
     }
 }
