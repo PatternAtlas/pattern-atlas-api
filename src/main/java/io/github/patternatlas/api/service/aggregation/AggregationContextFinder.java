@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import io.github.patternatlas.api.rest.dto.AggregationContext;
 import io.github.patternatlas.api.service.SolutionModelService;
+import io.github.patternatlas.api.service.aggregation.programs.AggregationProgram;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

@@ -28,9 +28,9 @@ import io.github.patternatlas.api.service.PatternService;
 import io.github.patternatlas.api.service.SolutionModelService;
 import io.github.patternatlas.api.service.aggregation.AggregationContextFinder;
 import io.github.patternatlas.api.service.aggregation.AggregationEngine;
-import io.github.patternatlas.api.service.aggregation.AggregationProgram;
-import io.github.patternatlas.api.service.aggregation.MyTestAggregationProgram1;
-import io.github.patternatlas.api.service.aggregation.MyTestAggregationProgram2;
+import io.github.patternatlas.api.service.aggregation.programs.AggregationProgram;
+import io.github.patternatlas.api.service.aggregation.programs.MyTestAggregationProgram1;
+import io.github.patternatlas.api.service.aggregation.programs.MyTestAggregationProgram2;
 
 @SpringBootTest
 public class AggregationEngineTest extends IntegrationTest {

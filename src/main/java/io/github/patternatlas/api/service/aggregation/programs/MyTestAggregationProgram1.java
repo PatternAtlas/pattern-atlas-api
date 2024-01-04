@@ -1,4 +1,4 @@
-package io.github.patternatlas.api.service.aggregation;
+package io.github.patternatlas.api.service.aggregation.programs;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,6 +18,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
 import io.github.patternatlas.api.entities.solutionaggregation.SolutionModel;
 import io.github.patternatlas.api.rest.dto.AggregationContext;
+import io.github.patternatlas.api.service.aggregation.DetectorGraph;
+import io.github.patternatlas.api.service.aggregation.DetectorGraphEdge;
+import io.github.patternatlas.api.service.aggregation.EdgeComparator;
+import io.github.patternatlas.api.service.aggregation.NodeComparator;
+import io.github.patternatlas.api.service.aggregation.OperationTarget;
+import io.github.patternatlas.api.service.aggregation.PseydoEdge;
+import io.github.patternatlas.api.service.aggregation.PseydoNode;
+import io.github.patternatlas.api.service.aggregation.programs.AggregationProgram;
 import lombok.Getter;
 import lombok.extern.apachecommons.CommonsLog;
 
@@ -49,7 +57,7 @@ public class MyTestAggregationProgram1 implements AggregationProgram {
             .capabilities(capabilities1)
             .id(UUID.fromString("de520326-6356-4a62-b57e-359bfd986835"))
             .build();
-        graph.operationTargets.add(ot1);
+        graph.getOperationTargets().add(ot1);
 
         Set<String> requirements2 = new HashSet<>(List.of("B"));
         Set<String> capabilities2 = new HashSet<>(List.of("C"));
@@ -59,9 +67,9 @@ public class MyTestAggregationProgram1 implements AggregationProgram {
             .capabilities(capabilities2)
             .id(UUID.fromString("1ca8024a-f19a-4994-b195-7d96105238cb"))
             .build();
-        graph.operationTargets.add(ot2);
+        graph.getOperationTargets().add(ot2);
 
-        graph.edges.add(DetectorGraphEdge.builder()
+        graph.getEdges().add(DetectorGraphEdge.builder()
             .ot1(ot1)
             .ot2(ot2)
             .directed(true)

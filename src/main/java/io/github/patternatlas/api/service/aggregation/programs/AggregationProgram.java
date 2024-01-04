@@ -1,10 +1,11 @@
-package io.github.patternatlas.api.service.aggregation;
+package io.github.patternatlas.api.service.aggregation.programs;
 
 import java.util.List;
 
 import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
 import io.github.patternatlas.api.entities.solutionaggregation.SolutionModel;
 import io.github.patternatlas.api.rest.dto.AggregationContext;
+import io.github.patternatlas.api.service.aggregation.DetectorGraph;
 
 public interface AggregationProgram {
 
