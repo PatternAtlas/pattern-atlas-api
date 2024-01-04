@@ -1,7 +1,6 @@
 package io.github.patternatlas.api.rest.controller;
 
 import static java.util.stream.Collectors.toList;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -27,19 +26,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.patternatlas.api.rest.dto.DesignModelModel;
-import io.github.patternatlas.api.rest.dto.EdgeDTO;
-import io.github.patternatlas.api.rest.dto.FileDTO;
-import io.github.patternatlas.api.rest.dto.PositionDTO;
-import io.github.patternatlas.api.service.ConcreteSolutionService;
-import io.github.patternatlas.api.service.DesignModelService;
 import io.github.patternatlas.api.entities.Pattern;
-import io.github.patternatlas.api.entities.designmodel.ConcreteSolution;
 import io.github.patternatlas.api.entities.designmodel.DesignModel;
 import io.github.patternatlas.api.entities.designmodel.DesignModelEdgeType;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternEdge;
 import io.github.patternatlas.api.entities.designmodel.DesignModelPatternInstance;
+import io.github.patternatlas.api.rest.dto.ConcreteSolutionModel;
+import io.github.patternatlas.api.rest.dto.DesignModelModel;
+import io.github.patternatlas.api.rest.dto.EdgeDTO;
+import io.github.patternatlas.api.rest.dto.FileDTO;
 import io.github.patternatlas.api.rest.dto.PatternInstanceDTO;
+import io.github.patternatlas.api.rest.dto.PositionDTO;
+import io.github.patternatlas.api.service.ConcreteSolutionService;
+import io.github.patternatlas.api.service.DesignModelService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -146,14 +145,15 @@ public class DesignModelController {
     }
 
     @GetMapping("/{designModelId}/concrete-solutions")
-    public List<ConcreteSolution> checkConcreteSolutions(@PathVariable UUID designModelId) {
+    public List<ConcreteSolutionModel> checkConcreteSolutions(@PathVariable UUID designModelId) {
         List<DesignModelPatternInstance> patternInstanceList = this.designModelService.getDesignModel(designModelId).getPatterns();
         Set<String> patternUris =
             patternInstanceList.stream().map(patternInstance -> patternInstance.getPattern().getUri()).collect(Collectors.toSet());
-        Set<ConcreteSolution> concreteSolutionSet = new HashSet<>();
+        Set<ConcreteSolutionModel> concreteSolutionSet = new HashSet<>();
 
         for (String uri : patternUris) {
-            this.concreteSolutionService.getConcreteSolutions(URI.create(uri)).forEach(concreteSolution -> concreteSolutionSet.add(concreteSolution));
+            this.concreteSolutionService.getConcreteSolutions(URI.create(uri))
+                .forEach(concreteSolution -> concreteSolutionSet.add(ConcreteSolutionModel.from(concreteSolution)));
         }
 
         return new ArrayList<>(concreteSolutionSet);
