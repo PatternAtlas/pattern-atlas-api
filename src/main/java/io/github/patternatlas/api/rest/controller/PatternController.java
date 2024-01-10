@@ -38,9 +38,11 @@ import io.github.patternatlas.api.service.PatternService;
 import io.github.patternatlas.api.service.PatternViewService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*", origins = "*")
+@Tag(name = "Pattern Language Management")
 @RequestMapping(value = "/", produces = "application/json")
 public class PatternController {
 

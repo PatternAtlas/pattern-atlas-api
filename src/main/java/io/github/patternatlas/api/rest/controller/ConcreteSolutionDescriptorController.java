@@ -18,6 +18,7 @@ import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionD
 import io.github.patternatlas.api.rest.dto.CreateConcreteSolutionDescriptorRequest;
 import io.github.patternatlas.api.rest.dto.UpdateConcreteSolutionDescriptorRequest;
 import io.github.patternatlas.api.service.ConcreteSolutionDescriptorService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
 
@@ -25,6 +26,7 @@ import lombok.extern.apachecommons.CommonsLog;
 @CommonsLog
 @CrossOrigin(allowedHeaders = "*", origins = "*")
 @AllArgsConstructor
+@Tag(name = "Concrete Solution Aggregation")
 @RequestMapping(value = "/concrete-solution-descriptors", produces = "application/json")
 public class ConcreteSolutionDescriptorController {
 

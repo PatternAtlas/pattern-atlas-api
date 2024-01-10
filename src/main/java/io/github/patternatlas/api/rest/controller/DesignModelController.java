@@ -42,11 +42,13 @@ import io.github.patternatlas.api.service.DesignModelService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.apachecommons.CommonsLog;
 
 @RestController
 @CommonsLog
 @CrossOrigin(allowedHeaders = "*", origins = "*")
+@Tag(name = "Design Model Management")
 @RequestMapping(value = "/design-models", produces = "application/json")
 public class DesignModelController {
 

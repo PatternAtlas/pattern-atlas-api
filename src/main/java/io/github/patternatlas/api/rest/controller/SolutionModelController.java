@@ -22,6 +22,7 @@ import io.github.patternatlas.api.rest.dto.SolutionModelDto;
 import io.github.patternatlas.api.rest.dto.UUIDDTO;
 import io.github.patternatlas.api.rest.dto.UpdateSolutionModelEdgeRequest;
 import io.github.patternatlas.api.service.SolutionModelService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
 
@@ -29,6 +30,7 @@ import lombok.extern.apachecommons.CommonsLog;
 @CommonsLog
 @CrossOrigin(allowedHeaders = "*", origins = "*")
 @AllArgsConstructor
+@Tag(name = "Concrete Solution Aggregation")
 @RequestMapping(value = "/solution-models", produces = "application/json")
 public class SolutionModelController {
 

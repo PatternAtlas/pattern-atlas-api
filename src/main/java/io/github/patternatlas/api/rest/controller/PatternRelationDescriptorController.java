@@ -32,9 +32,11 @@ import io.github.patternatlas.api.service.PatternViewService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*", origins = "*")
+@Tag(name = "Pattern Language Management")
 @RequestMapping(value = "/", produces = "application/json")
 public class PatternRelationDescriptorController {
 
@@ -144,109 +146,4 @@ public class PatternRelationDescriptorController {
         return ResponseEntity.noContent().build();
     }
 
-    // Edges of Views
-
-    @Operation(operationId = "addDirectedEdgeToView", responses = {@ApiResponse(responseCode = "200"),
-        @ApiResponse(responseCode = "404", content = @Content)}, description = "Adds directed edge to view")
-    @PostMapping(value = "/pattern-views/{patternViewId}/directed-edges")
-    @CrossOrigin(exposedHeaders = "Location")
-    @ResponseStatus(HttpStatus.OK)
-    public DirectedEdgeModel addDirectedEdgeToView(@PathVariable UUID patternViewId, @RequestBody AddDirectedEdgeToViewRequest request) {
-        if (request.isNewEdge()) {
-            DirectedEdge directedEdge = this.patternViewService.createDirectedEdgeAndAddToPatternView(patternViewId, request);
-            return DirectedEdgeModel.from(directedEdge);
-        } else {
-            this.patternViewService.addDirectedEdgeToPatternView(patternViewId, request.getDirectedEdgeId());
-            DirectedEdge directedEdge = this.patternViewService.getDirectedEdgeOfPatternViewById(patternViewId, request.getDirectedEdgeId());
-            return DirectedEdgeModel.from(directedEdge);
-        }
-    }
-
-    @Operation(operationId = "getDirectedEdgesOfView", responses = {@ApiResponse(responseCode = "200"),
-        @ApiResponse(responseCode = "404", content = @Content)}, description = "Retrieve directed edges of view")
-    @GetMapping(value = "/pattern-views/{patternViewId}/directed-edges")
-    public List<DirectedEdgeModel> getDirectedEdgesOfView(@PathVariable UUID patternViewId) {
-        return this.patternViewService.getDirectedEdgesByPatternViewId(patternViewId)
-            .stream()
-            .map(DirectedEdgeModel::from)
-            .collect(Collectors.toList());
-    }
-
-    @Operation(operationId = "getDirectedEdgeOfPatternViewById", responses = {@ApiResponse(responseCode = "200"),
-        @ApiResponse(responseCode = "404", content = @Content)}, description = "Retrieve directed edge of pattern view by id")
-    @GetMapping(value = "/pattern-views/{patternViewId}/directed-edges/{directedEdgeId}")
-    public DirectedEdgeModel getDirectedEdgeOfPatternViewById(@PathVariable UUID patternViewId, @PathVariable UUID directedEdgeId) {
-        DirectedEdge directedEdge = this.patternViewService.getDirectedEdgeOfPatternViewById(patternViewId, directedEdgeId);
-        return DirectedEdgeModel.from(directedEdge);
-    }
-
-    @Operation(operationId = "updateDirectedEdgeOfPatternViewById", responses = {@ApiResponse(responseCode = "200"),
-        @ApiResponse(responseCode = "404", content = @Content)}, description = "Update directed edge of pattern view by id")
-    @PutMapping(value = "/pattern-views/{patternViewId}/directed-edges/{directedEdgeId}")
-    public DirectedEdgeModel putDirectedEdgeToPatternView(@PathVariable UUID patternViewId, @PathVariable UUID directedEdgeId,
-                                                          @RequestBody UpdateDirectedEdgeRequest request) {
-        request.setDirectedEdgeId(directedEdgeId);
-        DirectedEdge directedEdge = this.patternViewService.updateDirectedEdgeOfPatternView(patternViewId, request);
-        return DirectedEdgeModel.from(directedEdge);
-    }
-
-    @Operation(operationId = "removeDirectedEdgeFromPatternView", responses = {@ApiResponse(responseCode = "200"),
-        @ApiResponse(responseCode = "404", content = @Content)}, description = "Remove directed edge of pattern view by id")
-    @DeleteMapping(value = "/pattern-views/{patternViewId}/directed-edges/{directedEdgeId}")
-    public ResponseEntity<?> removeDirectedEdgeFromPatternView(@PathVariable UUID patternViewId, @PathVariable UUID directedEdgeId) {
-        this.patternViewService.removeDirectedEdgeFromPatternView(patternViewId, directedEdgeId);
-        return ResponseEntity.noContent().build();
-    }
-
-    @Operation(operationId = "addUndirectedEdgeToView", responses = {@ApiResponse(responseCode = "200"),
-        @ApiResponse(responseCode = "404", content = @Content)}, description = "Add undirected edge to pattern view")
-    @PostMapping(value = "/pattern-views/{patternViewId}/undirected-edges")
-    @CrossOrigin(exposedHeaders = "Location")
-    @ResponseStatus(HttpStatus.OK)
-    public UndirectedEdgeModel addUndirectedEdgeToView(@PathVariable UUID patternViewId, @RequestBody AddUndirectedEdgeToViewRequest request) {
-        if (request.isNewEdge()) {
-            UndirectedEdge undirectedEdge = this.patternViewService.createUndirectedEdgeAndAddToPatternView(patternViewId, request);
-            return UndirectedEdgeModel.from(undirectedEdge);
-        } else {
-            this.patternViewService.addUndirectedEdgeToPatternView(patternViewId, request.getUndirectedEdgeId());
-            UndirectedEdge undirectedEdge = this.patternViewService.getUndirectedEdgeOfPatternViewById(patternViewId, request.getUndirectedEdgeId());
-            return UndirectedEdgeModel.from(undirectedEdge);
-        }
-    }
-
-    @Operation(operationId = "getUndirectedEdgesOfView", responses = {@ApiResponse(responseCode = "200"),
-        @ApiResponse(responseCode = "404", content = @Content)}, description = "Retrieve undirected edges of pattern view")
-    @GetMapping(value = "/pattern-views/{patternViewId}/undirected-edges")
-    public List<UndirectedEdgeModel> getUndirectedEdgesOfView(@PathVariable UUID patternViewId) {
-        return this.patternViewService.getUndirectedEdgesByPatternViewId(patternViewId)
-            .stream()
-            .map(UndirectedEdgeModel::from)
-            .collect(Collectors.toList());
-    }
-
-    @Operation(operationId = "getUndirectedEdgeOfPatternViewById", responses = {@ApiResponse(responseCode = "200"),
-        @ApiResponse(responseCode = "404", content = @Content)}, description = "Retrieve undirected edge of pattern view by id")
-    @GetMapping(value = "/pattern-views/{patternViewId}/undirected-edges/{undirectedEdgeId}")
-    public UndirectedEdgeModel getUndirectedEdgeOfPatternViewById(@PathVariable UUID patternViewId, @PathVariable UUID undirectedEdgeId) {
-        UndirectedEdge undirectedEdge = this.patternViewService.getUndirectedEdgeOfPatternViewById(patternViewId, undirectedEdgeId);
-        return UndirectedEdgeModel.from(undirectedEdge);
-    }
-
-    @Operation(operationId = "updateUndirectedEdgeOfPatternView", responses = {@ApiResponse(responseCode = "200"),
-        @ApiResponse(responseCode = "404", content = @Content)}, description = "Update undirected edge of pattern view by id")
-    @PutMapping(value = "/pattern-views/{patternViewId}/undirected-edges/{undirectedEdgeId}")
-    public UndirectedEdgeModel putUndirectedEdgeToPatternView(@PathVariable UUID patternViewId, @PathVariable UUID undirectedEdgeId,
-                                                              @RequestBody UpdateUndirectedEdgeRequest request) {
-        request.setUndirectedEdgeId(undirectedEdgeId);
-        UndirectedEdge undirectedEdge = this.patternViewService.updateUndirectedEdgeOfPatternView(patternViewId, request);
-        return UndirectedEdgeModel.from(undirectedEdge);
-    }
-
-    @Operation(operationId = "removeUndirectedEdgeFromPatternView", responses = {@ApiResponse(responseCode = "200"),
-        @ApiResponse(responseCode = "404", content = @Content)}, description = "Remove undirected edge of pattern view by id")
-    @DeleteMapping(value = "/pattern-views/{patternViewId}/undirected-edges/{undirectedEdgeId}")
-    public ResponseEntity<?> removeUndirectedEdgeFromPatternView(@PathVariable UUID patternViewId, @PathVariable UUID undirectedEdgeId) {
-        this.patternViewService.removeUndirectedEdgeFromPatternView(patternViewId, undirectedEdgeId);
-        return ResponseEntity.noContent().build();
-    }
 }

@@ -15,6 +15,7 @@ import io.github.patternatlas.api.service.PatternLanguageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +39,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
+@Tag(name = "Pattern Evolution")
 @RequestMapping(value = "/candidates", produces = "application/hal+json")
 public class CandidateController {
 

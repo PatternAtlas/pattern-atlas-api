@@ -21,9 +21,11 @@ import io.github.patternatlas.api.rest.dto.DiscussionTopicModel;
 import io.github.patternatlas.api.entities.DiscussionComment;
 import io.github.patternatlas.api.entities.DiscussionTopic;
 import io.github.patternatlas.api.service.DiscussionService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @ConditionalOnExpression(value = "false")  // TODO: check if discussions can be removed completely
+@Tag(name = "Concrete Solution Aggregation")
 @CrossOrigin(allowedHeaders = "*", origins = "*")
 public class DiscussionController {
 
