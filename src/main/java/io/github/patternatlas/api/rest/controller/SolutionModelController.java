@@ -70,6 +70,7 @@ public class SolutionModelController {
             .toList();
     }
 
+    @Transactional
     @GetMapping("/{id}")
     public SolutionModelDto getSolutionModel(@PathVariable UUID id) {
         var solutionModel = this.solutionModelService.getSolutionModel(id);
@@ -93,9 +94,9 @@ public class SolutionModelController {
                     e.getDescription()
                 ))
                 .toList(),
-            solutionModel.getDesignModel().getId(),
-            solutionModel.getDesignModel().getUri(),
-            solutionModel.getDesignModel().getName(),
+            solutionModel.getDesignModel() == null ? null : solutionModel.getDesignModel().getId(),
+            solutionModel.getDesignModel() == null ? null : solutionModel.getDesignModel().getUri(),
+            solutionModel.getDesignModel() == null ? null : solutionModel.getDesignModel().getName(),
             solutionModel.getPreviousSolutionModelId());
     }
 

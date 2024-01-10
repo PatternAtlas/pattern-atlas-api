@@ -8,6 +8,8 @@ import java.util.UUID;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
 import io.github.patternatlas.api.entities.solutionaggregation.SolutionModel;
@@ -97,18 +99,13 @@ public class AggregationEngine {
         return this.solutionModelService.getSolutionModel(newSolutionModel.getId());
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public SolutionModel aggregate(UUID oldSolutionModelId, AggregationContext aggregationContext) {
-        try {
             var aggregationProgram = this.aggregationPrograms.stream().filter(p -> p.getId().equals(aggregationContext.getAggregationProgramName()))
                 .findFirst().orElseThrow( () -> new RuntimeException("Aggregation program not found!"));
 
             var newCSD = aggregationProgram.aggregate(aggregationContext);
             var newSolutionModel = aggregationProgram.updateSolutionModel(this.solutionModelService.getSolutionModel(oldSolutionModelId), aggregationContext, newCSD);
-            return newSolutionModel;
-        } catch (BeansException e) {
-            throw new RuntimeException("Aggregation program not found!");
-        } catch (Exception e) {
-            throw new RuntimeException("Aggregation failed!");
-        }
+            return this.solutionModelService.getSolutionModel(newSolutionModel.getId());
     }
 }
