@@ -1,6 +1,7 @@
 package io.github.patternatlas.api.entities.solutionaggregation;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -35,9 +36,7 @@ public class ConcreteSolutionDescriptor {
     @GeneratedValue(generator = "pg-uuid")
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "pattern_id")
-    private Pattern pattern;
+    private UUID patternId;
 
     private String name;
 
@@ -46,15 +45,17 @@ public class ConcreteSolutionDescriptor {
     @Lob
     private String template;
 
+    private String templateMimeType;
+
     private String type;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private Object properties;
+    private Map<String, Object> properties;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
-    private Object selectionCriteria;
+    private Map<String, Object> selectionCriteria;
 
     @Setter
     @Type(type = "jsonb")
@@ -70,13 +71,5 @@ public class ConcreteSolutionDescriptor {
     @ToString.Exclude
     @OneToMany(mappedBy = "concreteSolutionDescriptor")
     private List<SolutionModelConcreteSolutionInstance> solutionModelConcreteSolutionInstances;
-
-    public void setProperties(Object description) {
-        this.properties = mapper.valueToTree(description);
-    }
-
-    public void setSelectionCriteria(Object description) {
-        this.selectionCriteria = mapper.valueToTree(description);
-    }
 
 }

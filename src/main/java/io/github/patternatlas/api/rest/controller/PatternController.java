@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.UUID;
 import javax.validation.Valid;
 
 import org.apache.commons.text.CaseUtils;
@@ -30,6 +31,7 @@ import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionD
 import io.github.patternatlas.api.rest.dto.PatternContentModel;
 import io.github.patternatlas.api.rest.dto.PatternModel;
 import io.github.patternatlas.api.rest.dto.PatternRenderedContentModel;
+import io.github.patternatlas.api.service.ConcreteSolutionDescriptorService;
 import io.github.patternatlas.api.service.PatternLanguageService;
 import io.github.patternatlas.api.service.PatternRenderService;
 import io.github.patternatlas.api.service.PatternService;
@@ -48,6 +50,8 @@ public class PatternController {
 
     private final PatternViewService patternViewService;
 
+    private final ConcreteSolutionDescriptorService concreteSolutionDescriptorService;
+
 
     private final ObjectMapper objectMapper;
 
@@ -57,10 +61,12 @@ public class PatternController {
                              PatternLanguageService patternLanguageService,
                              PatternViewService patternViewService,
                              PatternRenderService patternRenderService,
+                             ConcreteSolutionDescriptorService concreteSolutionDescriptorService,
                              ObjectMapper objectMapper) {
         this.patternService = patternService;
         this.patternLanguageService = patternLanguageService;
         this.patternViewService = patternViewService;
+        this.concreteSolutionDescriptorService = concreteSolutionDescriptorService;
         this.objectMapper = objectMapper;
         this.patternRenderService = patternRenderService;
     }
@@ -68,7 +74,7 @@ public class PatternController {
     @GetMapping(value = "/patterns/{patternId}/concrete-solution-descriptors")
     List<ConcreteSolutionDescriptor> getConcreteSolutionsOfPattern(@PathVariable java.util.UUID patternId) {
         Pattern pattern = this.patternService.getPatternById(patternId);
-        return pattern.getConcreteSolutionDescriptors();
+        return this.concreteSolutionDescriptorService.getAllConcreteSolutionDescriptorsByPatternId(pattern.getId());
     }
 
     @Operation(operationId = "getPatternByUri", responses = {@ApiResponse(responseCode = "200"),
@@ -227,13 +233,13 @@ public class PatternController {
     }
 
     @GetMapping(value = "/pattern-languages/{patternLanguageId}/patterns/{patternId}/concrete-solution-descriptors")
-    List<ConcreteSolutionDescriptor> getConcreteSolutionsOfPatternOfPatternLanguage(@PathVariable java.util.UUID patternLanguageId,
-                                                                                    @PathVariable java.util.UUID patternId) {
+    List<ConcreteSolutionDescriptor> getConcreteSolutionsOfPatternOfPatternLanguage(@PathVariable UUID patternLanguageId,
+                                                                                    @PathVariable UUID patternId) {
         Pattern pattern = this.patternService.getPatternById(patternId);
         if (!pattern.getPatternLanguage().getId().equals(patternLanguageId)) {
             throw new IllegalArgumentException("Pattern does not belong to pattern language");
         }
-        return pattern.getConcreteSolutionDescriptors();
+        return this.concreteSolutionDescriptorService.getAllConcreteSolutionDescriptorsByPatternId(pattern.getId());
     }
 
 }

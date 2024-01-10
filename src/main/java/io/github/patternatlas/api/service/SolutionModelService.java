@@ -3,6 +3,8 @@ package io.github.patternatlas.api.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import io.github.patternatlas.api.entities.solutionaggregation.SolutionModel;
 import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelConcreteSolutionInstance;
 import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelEdge;
@@ -11,6 +13,7 @@ import io.github.patternatlas.api.rest.dto.UpdateSolutionModelEdgeRequest;
 
 public interface SolutionModelService {
 
+    @Transactional
     List<SolutionModel> getAllSolutionModels();
 
     SolutionModel getSolutionModelById(UUID id);

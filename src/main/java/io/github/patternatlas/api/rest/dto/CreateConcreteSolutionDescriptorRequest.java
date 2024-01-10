@@ -1,5 +1,6 @@
 package io.github.patternatlas.api.rest.dto;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -13,8 +14,9 @@ public class CreateConcreteSolutionDescriptorRequest {
     private String name;
     private String templateUri;
     private String template;
-    private Object properties;
-    private Object selectionCriteria;
+    private String templateMimeType;
+    private Map<String, Object> properties;
+    private Map<String, Object> selectionCriteria;
     private Set<String> requirements;
     private Set<String> capabilities;
     private UUID patternId;

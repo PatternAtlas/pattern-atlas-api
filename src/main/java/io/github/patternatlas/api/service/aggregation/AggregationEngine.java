@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import io.github.patternatlas.api.entities.solutionaggregation.ConcreteSolutionDescriptor;
@@ -13,6 +15,7 @@ import io.github.patternatlas.api.repositories.SolutionModelConcreteSolutionInst
 import io.github.patternatlas.api.rest.dto.AddEdgeToSolutionModelRequest;
 import io.github.patternatlas.api.rest.dto.AggregationContext;
 import io.github.patternatlas.api.service.SolutionModelService;
+import io.github.patternatlas.api.service.aggregation.programs.AggregationProgram;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -20,6 +23,8 @@ import lombok.AllArgsConstructor;
 public class AggregationEngine {
 
     private SolutionModelService solutionModelService;
+
+    private List<AggregationProgram> aggregationPrograms;
 
     private SolutionModelConcreteSolutionInstanceRepository solutionModelConcreteSolutionInstanceRepository;
 
@@ -92,4 +97,18 @@ public class AggregationEngine {
         return this.solutionModelService.getSolutionModel(newSolutionModel.getId());
     }
 
+    public SolutionModel aggregate(UUID oldSolutionModelId, AggregationContext aggregationContext) {
+        try {
+            var aggregationProgram = this.aggregationPrograms.stream().filter(p -> p.getId().equals(aggregationContext.getAggregationProgramName()))
+                .findFirst().orElseThrow( () -> new RuntimeException("Aggregation program not found!"));
+
+            var newCSD = aggregationProgram.aggregate(aggregationContext);
+            var newSolutionModel = aggregationProgram.updateSolutionModel(this.solutionModelService.getSolutionModel(oldSolutionModelId), aggregationContext, newCSD);
+            return newSolutionModel;
+        } catch (BeansException e) {
+            throw new RuntimeException("Aggregation program not found!");
+        } catch (Exception e) {
+            throw new RuntimeException("Aggregation failed!");
+        }
+    }
 }

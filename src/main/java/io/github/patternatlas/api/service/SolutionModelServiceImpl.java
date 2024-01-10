@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.github.patternatlas.api.entities.solutionaggregation.SolutionModel;
 import io.github.patternatlas.api.entities.solutionaggregation.SolutionModelConcreteSolutionInstance;
@@ -31,6 +32,7 @@ public class SolutionModelServiceImpl implements SolutionModelService {
 
     SolutionModelEdgeRepository solutionModelEdgeRepository;
 
+    @Transactional
     @Override
     public List<SolutionModel> getAllSolutionModels() {
         return solutionModelRepository.findAll();

@@ -25,7 +25,6 @@ import io.github.patternatlas.api.service.aggregation.NodeComparator;
 import io.github.patternatlas.api.service.aggregation.OperationTarget;
 import io.github.patternatlas.api.service.aggregation.PseydoEdge;
 import io.github.patternatlas.api.service.aggregation.PseydoNode;
-import io.github.patternatlas.api.service.aggregation.programs.AggregationProgram;
 import lombok.Getter;
 import lombok.extern.apachecommons.CommonsLog;
 
@@ -149,7 +148,7 @@ public class MyTestAggregationProgram2 implements AggregationProgram {
     }
 
     @Override
-    public SolutionModel updateSolutionModel(SolutionModel solutionModel, SolutionModel aggregationContext,
+    public SolutionModel updateSolutionModel(SolutionModel solutionModel, AggregationContext aggregationContext,
                                              ConcreteSolutionDescriptor concreteSolutionDescriptor) {
         return null;
     }

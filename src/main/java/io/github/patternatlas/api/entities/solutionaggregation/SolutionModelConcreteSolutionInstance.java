@@ -29,6 +29,8 @@ public class SolutionModelConcreteSolutionInstance {
     @GeneratedValue(generator = "pg-uuid")
     private UUID id;
 
+    @JsonIgnore
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "concrete_solution_descriptor_id")
     private ConcreteSolutionDescriptor concreteSolutionDescriptor;

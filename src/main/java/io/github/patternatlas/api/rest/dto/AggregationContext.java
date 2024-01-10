@@ -10,6 +10,8 @@ import lombok.Data;
 public class AggregationContext {
     String aggregationProgramName;
 
+    UUID solutionModelId;
+
     Set<UUID> concreteSolutionInstanceIds = new HashSet<>();
 
     Set<UUID> solutionModelEdgeIds = new HashSet<>();

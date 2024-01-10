@@ -11,6 +11,8 @@ public interface ConcreteSolutionDescriptorService {
 
     List<ConcreteSolutionDescriptor> getAllConcreteSolutionDescriptors();
 
+    List<ConcreteSolutionDescriptor> getAllConcreteSolutionDescriptorsByPatternId(UUID patternId);
+
     ConcreteSolutionDescriptor getConcreteSolutionDescriptor(UUID id);
 
     ConcreteSolutionDescriptor createConcreteSolutionDescriptor(CreateConcreteSolutionDescriptorRequest request);

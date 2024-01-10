@@ -27,6 +27,11 @@ public class ConcreteSolutionDescriptorServiceImpl implements ConcreteSolutionDe
     }
 
     @Override
+    public List<ConcreteSolutionDescriptor> getAllConcreteSolutionDescriptorsByPatternId(UUID patternId) {
+        return null;
+    }
+
+    @Override
     public ConcreteSolutionDescriptor getConcreteSolutionDescriptor(java.util.UUID id) {
         return this.concreteSolutionDescriptorRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Concrete Solution Descriptor not found!"));
@@ -34,14 +39,13 @@ public class ConcreteSolutionDescriptorServiceImpl implements ConcreteSolutionDe
 
     @Override
     public ConcreteSolutionDescriptor createConcreteSolutionDescriptor(CreateConcreteSolutionDescriptorRequest request) {
-        Pattern pattern = this.patternRepository.findById(request.getPatternId())
-            .orElseThrow(() -> new ResourceNotFoundException("Pattern not found!"));
 
         ConcreteSolutionDescriptor concreteSolutionDescriptor = new ConcreteSolutionDescriptor();
-        concreteSolutionDescriptor.setPattern(pattern);
+        concreteSolutionDescriptor.setPatternId(request.getPatternId());
         concreteSolutionDescriptor.setName(request.getName());
         concreteSolutionDescriptor.setTemplateUri(request.getTemplateUri());
         concreteSolutionDescriptor.setTemplate(request.getTemplate());
+        concreteSolutionDescriptor.setTemplateMimeType(request.getTemplateMimeType());
         concreteSolutionDescriptor.setType(request.getType());
         concreteSolutionDescriptor.setProperties(request.getProperties());
         concreteSolutionDescriptor.setSelectionCriteria(request.getSelectionCriteria());
@@ -57,10 +61,7 @@ public class ConcreteSolutionDescriptorServiceImpl implements ConcreteSolutionDe
         ConcreteSolutionDescriptor concreteSolutionDescriptor = this.concreteSolutionDescriptorRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Concrete Solution Descriptor not found!"));
 
-        Pattern pattern = this.patternRepository.findById(request.getPatternId())
-            .orElseThrow(() -> new ResourceNotFoundException("Pattern not found!"));
-
-        concreteSolutionDescriptor.setPattern(pattern);
+        concreteSolutionDescriptor.setPatternId(request.getPatternId());
         concreteSolutionDescriptor.setName(request.getName());
         concreteSolutionDescriptor.setTemplateUri(request.getTemplateUri());
         concreteSolutionDescriptor.setTemplate(request.getTemplate());

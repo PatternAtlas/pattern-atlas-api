@@ -36,11 +36,6 @@ public class Pattern extends EntityWithURI {
 
     @JsonIgnore
     @ToString.Exclude
-    @OneToMany(mappedBy = "pattern")
-    private List<ConcreteSolutionDescriptor> concreteSolutionDescriptors;
-
-    @JsonIgnore
-    @ToString.Exclude
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PatternViewPattern> patternViews = new ArrayList<>();
 

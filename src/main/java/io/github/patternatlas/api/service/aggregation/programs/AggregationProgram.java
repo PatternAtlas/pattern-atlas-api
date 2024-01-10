@@ -17,5 +17,5 @@ public interface AggregationProgram {
 
     ConcreteSolutionDescriptor aggregate(AggregationContext aggregationContext);
 
-    SolutionModel updateSolutionModel(SolutionModel solutionModel, SolutionModel aggregationContext, ConcreteSolutionDescriptor concreteSolutionDescriptor);
+    SolutionModel updateSolutionModel(SolutionModel solutionModel, AggregationContext aggregationContext, ConcreteSolutionDescriptor concreteSolutionDescriptor);
 }
