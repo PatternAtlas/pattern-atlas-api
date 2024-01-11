@@ -285,8 +285,10 @@ public class EIPCloudAggregationTest {
         assertEquals(1, finalSolutionModel.getConcreteSolutionInstances().size());
         assertEquals(0, finalSolutionModel.getEdges().size());
 
-        // Next steps:
-        // 3. Add Controller to get AggregationContexts and to trigger aggregations
+        // Result:
+        // All CS aggregated to a single CS aggregate in two steps.
+        // Thereby two new solution models were created.
+
     }
 
 }
