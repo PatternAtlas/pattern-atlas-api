@@ -103,7 +103,9 @@ public class AggregationEngine {
     public SolutionModel aggregate(UUID oldSolutionModelId, AggregationContext aggregationContext) {
             var aggregationProgram = this.aggregationPrograms.stream().filter(p -> p.getId().equals(aggregationContext.getAggregationProgramName()))
                 .findFirst().orElseThrow( () -> new RuntimeException("Aggregation program not found!"));
-
+            if (!aggregationProgram.canAggregate(aggregationContext)) {
+                throw new IllegalStateException("Aggregation program cannot aggregate given aggregation context!");
+            }
             var newCSD = aggregationProgram.aggregate(aggregationContext);
             var newSolutionModel = aggregationProgram.updateSolutionModel(this.solutionModelService.getSolutionModel(oldSolutionModelId), aggregationContext, newCSD);
             return this.solutionModelService.getSolutionModel(newSolutionModel.getId());
