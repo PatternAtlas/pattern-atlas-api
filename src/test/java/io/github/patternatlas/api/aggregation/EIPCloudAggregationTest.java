@@ -273,6 +273,7 @@ public class EIPCloudAggregationTest {
         assertEquals(1, aggregationContexts.size());
 
         var newSolutionModel = this.aggregationEngine.aggregate(solutionModel.getId(), aggregationContexts.get(0));
+        newSolutionModel = this.solutionModelService.getSolutionModel(newSolutionModel.getId());
         assertEquals(3, newSolutionModel.getConcreteSolutionInstances().size());
         assertEquals(2, newSolutionModel.getEdges().size());
 
@@ -280,6 +281,7 @@ public class EIPCloudAggregationTest {
         assertEquals(1, newAggregationContexts.size());
 
         var finalSolutionModel = this.aggregationEngine.aggregate(newSolutionModel.getId(), newAggregationContexts.get(0));
+        finalSolutionModel = this.solutionModelService.getSolutionModel(finalSolutionModel.getId());
         assertEquals(1, finalSolutionModel.getConcreteSolutionInstances().size());
         assertEquals(0, finalSolutionModel.getEdges().size());
 
