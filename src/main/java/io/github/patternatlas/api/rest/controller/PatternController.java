@@ -56,7 +56,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*", origins = "*")
-@RequestMapping(value = "/", produces = "application/hal+json")
+@RequestMapping(value = "/", produces = { "application/hal+json", "application/json" })
 public class PatternController {
 
     final private static Logger LOG = LoggerFactory.getLogger(PatternController.class);

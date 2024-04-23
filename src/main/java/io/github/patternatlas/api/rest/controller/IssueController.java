@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/issues", produces = "application/hal+json")
+@RequestMapping(value = "/issues", produces = { "application/hal+json", "application/json" })
 public class IssueController {
 
     Logger logger = LoggerFactory.getLogger(IssueController.class);

@@ -42,7 +42,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 @RestController
 @CrossOrigin(allowedHeaders = "*", origins = "*")
-@RequestMapping(value = "/patternViews", produces = "application/hal+json")
+@RequestMapping(value = "/patternViews", produces = { "application/hal+json", "application/json" })
 public class PatternViewController {
 
     private final PatternViewService patternViewService;
