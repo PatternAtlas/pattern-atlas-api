@@ -40,7 +40,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/candidates", produces = "application/hal+json")
+@RequestMapping(value = "/candidates", produces = { "application/hal+json", "application/json" })
 public class CandidateController {
 
     Logger logger = LoggerFactory.getLogger(CandidateController.class);

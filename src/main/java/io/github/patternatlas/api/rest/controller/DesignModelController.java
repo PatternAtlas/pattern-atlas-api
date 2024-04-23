@@ -57,7 +57,7 @@ import lombok.extern.apachecommons.CommonsLog;
 @ConditionalOnExpression(value = "false")  // TODO: set to true if the design models should be used again
 @CommonsLog
 @CrossOrigin(allowedHeaders = "*", origins = "*")
-@RequestMapping(value = "/design-models", produces = "application/hal+json")
+@RequestMapping(value = "/design-models", produces = { "application/hal+json", "application/json" })
 public class DesignModelController {
 
     private final DesignModelService designModelService;

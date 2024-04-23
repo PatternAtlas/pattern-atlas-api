@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/authors", produces = "application/hal+json")
+@RequestMapping(value = "/authors", produces = { "application/hal+json", "application/json" })
 public class AuthorController {
 
     private UserService userService;
